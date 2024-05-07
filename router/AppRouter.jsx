@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { Navbar } from "../Navbar"
-import { Login } from '../componentes/Login/Login'
-import { GestionUsuario } from '../componentes/Usuarios/Admin/GestionUsuario/GestionUsuario'
+import {Login} from '../src/Pages/Login/Login'
+import { GestionUsuario } from '../src/Pages/Usuarios/Admin/GestionUsuario/GestionUsuario'
 
 
 

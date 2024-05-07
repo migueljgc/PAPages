@@ -1,3 +1,3 @@
-export * from './Login/Login'
+export * from '../src/Pages/Login/Login'
 
-export * from './Usuarios/Admin/GestionUsuario/GestionUsuario'
+export * from '../src/Pages/Usuarios/Admin/GestionUsuario/GestionUsuario'
