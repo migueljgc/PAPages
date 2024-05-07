@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import './GestionUsuario.css';
-import '../../../../../componentes/script'
+import {Menu} from '../../../../../componentes/Menu'
 
 export const GestionUsuario = () => {
     return (
         <div className='GestionUsuario'>
+            <Menu/>
             <div className="container">
                 <div className="gestion">
                     <p>

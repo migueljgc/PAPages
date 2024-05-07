@@ -26,7 +26,6 @@ export const Script = () => {const [isOpen, setIsOpen] = useState(false);
       <div className="user-info">
         <img src='/iconprofile.png' alt="Foto de perfil" className="profile-picture" width="35%" height="40%" />
         <br />
-        <i className="fa fa-caret-down"></i>
       </div>
       {isOpen && (
         <div className="dropdown-content" ref={dropdownRef}>
