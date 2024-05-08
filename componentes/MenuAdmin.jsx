@@ -26,7 +26,7 @@ export const Menu = () => {
                     <Script />
 
                 </div>
-                <div className="imag"><img src='/pqrspng.png' width="55%" height="60%" /></div>
+                <div className="imag"><img src='/pqrspng.png' width="80%" height="85%" /></div>
             </div>
         </div>
     );
