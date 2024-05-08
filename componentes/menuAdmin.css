@@ -50,15 +50,15 @@ nav {
   width: 300px;
   top: 50px;
   height: calc(100vh - 50px);
-  background: transparent;
+  background: rgb(231, 221, 221);
   transform: translateX(-100%);
   transition: .4s ease;
 }
 
 .men li {
-  list-style: none;
+  list-style: disc;
   width: 100%;
-  border: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .men a {

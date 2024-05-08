@@ -1,7 +1,9 @@
 import React from 'react';
-import './menu.css';
+import './menuAdmin.css';
 import { Script } from './script';
 import { TiThMenu } from "react-icons/ti";
+import {EditarPerfil} from './EditarPerfil';
+
 
 export const Menu = () => {
     return (
@@ -13,7 +15,7 @@ export const Menu = () => {
                         <input type="checkbox" id="btn-nav" />
                         <nav>
                             <ul className="men">
-                                <li><a href="#">1</a></li>
+                            <li><a href="/EditarPerfil">1 </a></li>
 
                             </ul>
                         </nav>

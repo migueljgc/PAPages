@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './GestionUsuario.css';
-import {Menu} from '../../../../../componentes/Menu'
+import {Menu} from '../../../../../componentes/MenuAdmin'
 import { BackGraund } from '../../../../../componentes/BackGraund';
 
 export const GestionUsuario = () => {
