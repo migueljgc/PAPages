@@ -12,17 +12,17 @@
 
 .imag {
   grid-area: 1 / 2 / 2 / 3;
-  background-color: blanchedalmond;
+  background-color: transparent;
 }
 
 .usuario {
   grid-area: 1 / 3 / 2 / 4;
-  background-color: blanchedalmond;
+  background-color: transparent;
 }
 
 .menu {
   display: grid;
-  background-color: blanchedalmond;
+  background-color: transparent;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.3fr;
   gap: 0px 0px;
@@ -33,7 +33,7 @@
 .usa img {
   max-width: 100%;
   height: auto;
-  background: blanchedalmond;
+  background: transparent;
 }
 
 
@@ -50,7 +50,7 @@ nav {
   width: 300px;
   top: 50px;
   height: calc(100vh - 50px);
-  background: blanchedalmond;
+  background: transparent;
   transform: translateX(-100%);
   transition: .4s ease;
 }
@@ -58,7 +58,7 @@ nav {
 .men li {
   list-style: none;
   width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .men a {

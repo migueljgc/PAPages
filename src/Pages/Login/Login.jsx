@@ -4,6 +4,7 @@ import { VscAccount } from "react-icons/vsc";
 import { RiLockPasswordLine } from "react-icons/ri";
 import {useForm} from '../../../hook/useForm'
 import { useNavigate } from 'react-router-dom';
+import {BackGraund} from '../../../componentes/BackGraund'
 
 export const Login = () => {
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ export const Login = () => {
     
     return (
         <div className='login'>
+            <BackGraund />
             <div className="formLogin" onSubmit={onLogin}>
             <div className="usa">
                 <div className="usu"></div>
