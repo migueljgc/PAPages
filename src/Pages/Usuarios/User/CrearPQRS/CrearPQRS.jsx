@@ -38,7 +38,7 @@ const CrearPQRS = () => {
                 <label htmlFor=""></label>
                 <div className="formu">
                     <form className='formPQRS' onSubmit={handleSubmit}>
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="nombre">Nombre:</label><br />
                             <input
                                 type="text"
@@ -48,7 +48,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="apellido">Apellido:</label><br />
                             <input
                                 type="text"
@@ -58,7 +58,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div > <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="correo">Correo:</label><br />
                             <input
                                 type="email"
@@ -68,7 +68,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="numero">Número:</label><br />
                             <input
                                 type="text"
@@ -78,7 +78,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="rol">Rol:</label><br />
                             <input
                                 type="text"
@@ -88,7 +88,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="usuario">Usuario:</label><br />
                             <input
                                 type="text"
@@ -98,7 +98,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="contraseña">Contraseña:</label><br />
                             <input
                                 type="password"
@@ -108,7 +108,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="confirmarContraseña">Confirmar Contraseña:</label><br />
                             <input
                                 type="password"
@@ -118,7 +118,7 @@ const CrearPQRS = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="select-box">
+                        <div className="select-box1">
                             <label htmlFor="tipoIdentificacion">Tipo de Identificación:</label><br />
 
                             <select
@@ -136,7 +136,7 @@ const CrearPQRS = () => {
 
                             </select>                            
                         </div> <br />
-                        <div className="input-box">
+                        <div className="input-box1">
                             <label htmlFor="identificacion">Identificación:</label><br />
                             <input
                                 type="text"

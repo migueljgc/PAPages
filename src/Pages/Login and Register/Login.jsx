@@ -53,7 +53,7 @@ export const Login = () => {
                     </div><br />
                     <div className="remember-forgod">
                         <label > <input type="checkbox" />Recuerdame <label >  </label></label>
-                        <a href="#">  ¿Olvidaste tu contraseña?</a>
+                        <a href="/Recuperacion">  ¿Olvidaste tu contraseña?</a>
                     </div>
                     <div className="register">
                         <p>¿No tienes cuenta aún? <a href="#">Registrar</a></p>
