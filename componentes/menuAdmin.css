@@ -97,3 +97,26 @@ nav {
 .btn-nav:hover {
   background: rgba(0, 0, 0, 0.3);
 }
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+.profile-picture {
+  background-color: transparent;
+  max-width: 10%;
+  height: auto;
+  border-radius: 20%;
+  margin-right: 10px;
+}
+.user-menu {
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './menuAdmin.css';
 import { Script } from './script';
 import { TiThMenu } from "react-icons/ti";
-import {EditarPerfil} from './EditarPerfil';
+import { EditarPerfil } from './EditarPerfil';
 
 
 export const Menu = () => {
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="menus">
             <div className="usa">
@@ -15,7 +16,7 @@ export const Menu = () => {
                         <input type="checkbox" id="btn-nav" />
                         <nav>
                             <ul className="men">
-                            <li><a href="/EditarPerfil">1 </a></li>
+                                <li><a href="/EditarPerfil">1 </a></li>
 
                             </ul>
                         </nav>
@@ -23,7 +24,17 @@ export const Menu = () => {
                     </header>
                 </div>
                 <div className="usuario">
-                    <Script />
+                    <div className="user-menu">
+                        <div className="user-info">
+                            <img src='/iconprofile.png' alt="Foto de perfil" className="profile-picture" width="35%" height="40%" onClick={() => setIsOpen((prev) => !prev)} />
+                            <br />
+                        </div>
+                        {isOpen && (<Script />)
+                        }
+
+                    </div>
+
+
 
                 </div>
                 <div className="imag"><img src='/pqrspng.png' width="80%" height="85%" /></div>

@@ -8,6 +8,5 @@ export const EditarPerfil = () => {
             <BackGraund />
             <Menu />
             <h1>Editar Perfil-</h1>
-
         </div>)
 }
