@@ -1,5 +1,8 @@
 
 export const CrearUsuario  = () => {
     return (
-        <div className="crearUsuario"></div>
+        <div className="crearUsuario">
+            <BackGraund />
+            <Menu/>
+        </div>
     )}
