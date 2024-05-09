@@ -3,6 +3,8 @@ import { Navbar } from "../Navbar"
 import {Login} from '../src/Pages/Login/Login'
 import { GestionUsuario } from '../src/Pages/Usuarios/Admin/GestionUsuario/GestionUsuario'
 import { EditarPerfil } from "../componentes/EditarPerfil"
+import { CrearUsuario } from "../src/Pages/Usuarios/Admin/CrearUsuario/CrearUsuario"
+import { VerUsuarios } from "../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios"
 
 
 
@@ -15,6 +17,8 @@ export const AppRouter = () => {
                     <Route path="/Login" element={<Login />} />
                     <Route path="/GestionUsuario" element={<GestionUsuario />} />
                     <Route path="/EditarPerfil" element={<EditarPerfil />} />
+                    <Route path="/CrearUsuario" element={<CrearUsuario/>}/>
+                    <Route path="/VerUsuarios" element={<VerUsuarios/>}/>
                 </Route>
 
             </Routes>
