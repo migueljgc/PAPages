@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import './GestionUsuario.css';
+import './VerPQRS.css';
 import {Menu} from '../../../../../componentes/Menu'
 
-export const GestionUsuario = () => {
+export const VerPQRS = () => {
     return (
-        <div className='GestionUsuario'>
+        <div className='VerPQRS'>
             <Menu/>
-            <div className="container">
                 <div className="gestion">
                     <p>
                         <table className='tableDatos' border="3">
@@ -54,19 +53,8 @@ export const GestionUsuario = () => {
                     </p>
 
                 </div>
-                <div className="dato">
-                    <div className="form">
-                        <form action="">
-                            <label htmlFor="">nombre: </label>
-                            <input type="text" />
-                        </form>
-                    
-                    </div>
-                </div>
             </div>
 
-
-        </div>
     );
 };
 

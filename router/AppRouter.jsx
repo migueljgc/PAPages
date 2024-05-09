@@ -5,6 +5,7 @@ import { GestionUsuario } from '../src/Pages/Usuarios/Admin/GestionUsuario/Gesti
 import { EditarPerfil } from "../componentes/EditarPerfil"
 import { CrearUsuario } from "../src/Pages/Usuarios/Admin/CrearUsuario/CrearUsuario"
 import { VerUsuarios } from "../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios"
+import CrearPQRS from "../src/Pages/Usuarios/User/CrearPQRS/CrearPQRS"
 
 
 
@@ -19,6 +20,7 @@ export const AppRouter = () => {
                     <Route path="/EditarPerfil" element={<EditarPerfil />} />
                     <Route path="/CrearUsuario" element={<CrearUsuario/>}/>
                     <Route path="/VerUsuarios" element={<VerUsuarios/>}/>
+                    <Route path="/CrearPQRS" element={<CrearPQRS/>}/>
                 </Route>
 
             </Routes>
