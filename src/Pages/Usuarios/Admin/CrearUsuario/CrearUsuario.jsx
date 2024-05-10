@@ -3,7 +3,7 @@ import { BackGraund } from '../../../../../componentes/BackGraund';
 import { Menu } from '../../../../../componentes/MenuAdmin';
 import './CrearUsuario.css'
 
-const CrearUsuario = () => {
+export const CrearUsuario = () => {
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -15,6 +15,7 @@ const CrearUsuario = () => {
         confirmarContraseña: '',
         tipoIdentificacion: '',
         identificacion: '',
+        tipoPersona:'',
     });
 
     const handleChange = (e) => {
@@ -78,15 +79,22 @@ const CrearUsuario = () => {
                                 onChange={handleChange}
                             />
                         </div> <br />
-                        <div className="input-box1">
+                        <div className="select-box1">
                             <label htmlFor="rol">Rol:</label><br />
-                            <input
+                            <select
                                 type="text"
                                 id="rol"
                                 name="rol"
                                 value={formData.rol}
-                                onChange={handleChange}
-                            />
+                                onChange={handleChange}>
+
+
+                                <option value="">Seleccione el rol</option>
+                                <option value="Admin">Administrador</option>
+                                <option value="User">Usuario</option>
+                                <option value="Dependencia">Dependencia</option>
+
+                            </select> 
                         </div> <br />
                         <div className="input-box1">
                             <label htmlFor="usuario">Usuario:</label><br />
@@ -117,6 +125,22 @@ const CrearUsuario = () => {
                                 value={formData.confirmarContraseña}
                                 onChange={handleChange}
                             />
+                        </div> <br />
+                        <div className="select-box1">
+                            <label htmlFor="tipoPersona">Tipo de Persona:</label><br />
+                            <select
+                                type="text"
+                                id="tipoPersona"
+                                name="tipoPersona"
+                                value={formData.tipoPersona}
+                                onChange={handleChange}>
+
+
+                                <option value="">Seleccione el tipo</option>
+                                <option value="Natural">Natural</option>
+                                <option value="Juridica">Juridica</option>
+
+                            </select> 
                         </div> <br />
                         <div className="select-box1">
                             <label htmlFor="tipoIdentificacion">Tipo de Identificación:</label><br />
@@ -156,4 +180,3 @@ const CrearUsuario = () => {
     );
 };
 
-export default CrearUsuario;
