@@ -25,6 +25,55 @@ export const CrearUsuario = () => {
         });
     };
 
+    const handleTipoIdentificacion = (e) => {
+        const value = e.target.value;
+        let numericValue;
+
+        if (value === 'C.C') {
+            numericValue = 1;
+        } else if (value === 'T.I') {
+            numericValue = 2;
+        } else if (value === 'P.A') {
+            numericValue = 3;
+        } else {
+            numericValue = 4; // Puedes asignar otro valor numérico aquí
+        }
+
+        setFormData({ ...formData, tipoIdentificacion: numericValue });
+    };
+
+    const handleTipoPersona = (e) => {
+        const value = e.target.value;
+        let numericValue;
+
+        if (value === 'Natural') {
+            numericValue = 1;
+        } else if (value === 'Juridica') {
+            numericValue = 2;
+        } else {
+            numericValue = 3; // Puedes asignar otro valor numérico aquí
+        }
+
+        setFormData({ ...formData, tipoPersona: numericValue });
+    };
+
+    const handleRol = (e) => {
+        const value = e.target.value;
+        let numericValue;
+
+        if (value === 'Admin') {
+            numericValue = 1;
+        } else if (value === 'User') {
+            numericValue = 2;
+        } else if (value === 'Dependencia') {
+            numericValue = 3;
+        } else {
+            numericValue = 4; // Puedes asignar otro valor numérico aquí
+        }
+
+        setFormData({ ...formData, rol: numericValue });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -86,8 +135,7 @@ export const CrearUsuario = () => {
                                 id="rol"
                                 name="rol"
                                 value={formData.rol}
-                                onChange={handleChange}>
-
+                                onChange={handleRol}>
 
                                 <option value="">Seleccione el rol</option>
                                 <option value="Admin">Administrador</option>
@@ -133,8 +181,7 @@ export const CrearUsuario = () => {
                                 id="tipoPersona"
                                 name="tipoPersona"
                                 value={formData.tipoPersona}
-                                onChange={handleChange}>
-
+                                onChange={handleTipoPersona}>
 
                                 <option value="">Seleccione el tipo</option>
                                 <option value="Natural">Natural</option>
@@ -150,8 +197,7 @@ export const CrearUsuario = () => {
                                 id="tipoIdentificacion"
                                 name="tipoIdentificacion"
                                 value={formData.tipoIdentificacion}
-                                onChange={handleChange}>
-
+                                onChange={handleTipoIdentificacion}>
 
                                 <option value="">Seleccione Tipo de Identidicacion</option>
                                 <option value="C.C">C.C</option>
@@ -177,6 +223,5 @@ export const CrearUsuario = () => {
                 </div>
             </div>
         </div>
-    );
-};
-
+    )
+}
