@@ -11,7 +11,7 @@ export const Recovery = () => {
 
                     <h2>¿Olvidate tu contraseña?</h2>
                     <label>Para recuperar tu contraseña ingrese su Email o Numero</label><br /><br />
-                    <div className="input-box1">
+                    <div className="input-box2">
                         <label htmlFor="Email">Email:</label><br />
                         <input
                             type="text"
