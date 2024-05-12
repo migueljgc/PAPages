@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Registro.css'
 import { BackGraund } from '../../../componentes/BackGraund';
-import { Menu } from '../../../componentes/MenuAdmin';
 
 export const Registro = () => {
     const [formData, setFormData] = useState({

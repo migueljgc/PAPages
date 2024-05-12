@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import './GestionUsuario.css';
-import {Menu} from '../../../../../componentes/MenuAdmin'
 import { BackGraund } from '../../../../../componentes/BackGraund';
+import { MenuAdmin } from '../../../../../componentes/Menu';
 
 export const GestionUsuario = () => {
     return (
         <div className='GestionUsuario'>
             <BackGraund />
-            <Menu/>
+            <MenuAdmin/>
             <div className="container">
                 <div className="gestion">
                     <p>

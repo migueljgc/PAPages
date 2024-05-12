@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import './VerPQRS.css';
-import {Menu} from '../../../../../componentes/Menu'
+import { MenuUser } from '../../../../../componentes/Menu';
+import { BackGraund } from '../../../../../componentes/BackGraund';
 
 export const VerPQRS = () => {
     return (
         <div className='VerPQRS'>
-            <Menu/>
+            <BackGraund/>
+            <MenuUser/>
                 <div className="gestion">
                     <p>
                         <table className='tableDatos' border="3">

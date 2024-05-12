@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BackGraund } from '../../../../../componentes/BackGraund';
-import { Menu } from '../../../../../componentes/MenuAdmin';
 import './CrearUsuario.css'
+import { MenuAdmin } from '../../../../../componentes/Menu';
 
 export const CrearUsuario = () => {
     const [formData, setFormData] = useState({
@@ -83,7 +83,7 @@ export const CrearUsuario = () => {
     return (
         <div className="crearUsuario">
             <BackGraund />
-            <Menu />
+            <MenuAdmin />
             <div className="fr">
                 <label htmlFor=""></label>
                 <div className="formu">
