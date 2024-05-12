@@ -9,6 +9,7 @@ import { Recovery } from "../componentes/Recovery"
 import { Registro } from "../src/Pages/Login and Register/Registro"
 import { VerPQRS } from "../src/Pages/Usuarios/User/VerPQRS/VerPQRS"
 import { CrearPQRS } from "../src/Pages/Usuarios/User/CrearPQRS/CrearPQRS"
+import { PageNotFound } from "../componentes/PageNotFound"
 
 
 
@@ -29,6 +30,7 @@ export const AppRouter = () => {
                     <Route path="/Registro" element={<Registro/>}/>
                     <Route path="/VerPQRS" element={<VerPQRS/>}/>
                     <Route path="/CrearPQRS" element={<CrearPQRS/>}/>
+                    <Route path="*" element={<PageNotFound/>}/>
                 </Route>
 
             </Routes>
