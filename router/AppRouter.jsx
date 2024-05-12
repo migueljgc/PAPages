@@ -6,6 +6,7 @@ import { EditarPerfil } from "../componentes/EditarPerfil"
 import { CrearUsuario } from "../src/Pages/Usuarios/Admin/CrearUsuario/CrearUsuario"
 import { VerUsuarios } from "../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios"
 import { Recovery } from "../componentes/Recovery"
+import { Registro } from "../src/Pages/Login and Register/Registro"
 
 
 
@@ -21,6 +22,7 @@ export const AppRouter = () => {
                     <Route path="/CrearUsuario" element={<CrearUsuario/>}/>
                     <Route path="/VerUsuarios" element={<VerUsuarios/>}/>
                     <Route path="/Recuperacion" element={<Recovery/>}/>
+                    <Route path="/Registro" element={<Registro/>}/>
                 </Route>
 
             </Routes>

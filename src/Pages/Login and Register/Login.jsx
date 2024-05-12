@@ -56,7 +56,7 @@ export const Login = () => {
                         <a href="/Recuperacion">  ¿Olvidaste tu contraseña?</a>
                     </div>
                     <div className="register">
-                        <p>¿No tienes cuenta aún? <a href="#">Registrar</a></p>
+                        <p>¿No tienes cuenta aún? <a href="/Registro">Registrar</a></p>
                     </div>
                 </form>
             </div>
