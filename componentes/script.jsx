@@ -5,7 +5,7 @@ export const Script = () => {
 
 
     <div className="dropdown-content">
-      <div class="App">
+      <div className="App">
         <div className="arriba"><p><span className="username">¡Hola, Admin!</span></p></div>
         <div className="abajo"><a href="/EditarPerfilAdmin">
           <i className="fa fa-plus"></i>Editar usuario</a>
@@ -22,7 +22,7 @@ export const ScriptUser = () => {
 
 
     <div className="dropdown-content">
-      <div class="App">
+      <div className="App">
         <div className="arriba"><p><span className="username">¡Hola, Admin!</span></p></div>
         <div className="abajo"><a href="/EditarPerfilUser">
           <i className="fa fa-plus"></i>Editar usuario</a>
@@ -39,7 +39,7 @@ export const ScriptSecre = () => {
 
 
     <div className="dropdown-content">
-      <div class="App">
+      <div className="App">
         <div className="arriba"><p><span className="username">¡Hola, Admin!</span></p></div>
         <div className="abajo"><a href="/EditarPerfilSecre">
           <i className="fa fa-plus"></i>Editar usuario</a>

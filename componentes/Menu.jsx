@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './menu.css';
-import { Script } from './script';
+import { Script, ScriptSecre, ScriptUser } from './script';
 import { TiThMenu } from "react-icons/ti";
 
 
