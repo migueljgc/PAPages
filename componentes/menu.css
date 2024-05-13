@@ -28,6 +28,7 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas: "menu imag usuario";
+  z-index: 2;
 }
 
 .usa img {
@@ -120,3 +121,6 @@ nav {
   border-radius: 5px;
 }
 
+.menus{
+  z-index: 2;
+}

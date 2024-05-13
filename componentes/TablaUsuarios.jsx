@@ -1,5 +1,6 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
+import './TablaUsuarios.css'
 
 const columns = [
     {
@@ -29,7 +30,7 @@ const data =[
 
 export const TablaUsuarios = () => {
   return (
-    <>
+    <div className='cla'>
         <DataTable 
             columns={columns}
             data={data}
@@ -37,7 +38,7 @@ export const TablaUsuarios = () => {
 
         />
     
-    </>
+    </div>
   )
 }
 
