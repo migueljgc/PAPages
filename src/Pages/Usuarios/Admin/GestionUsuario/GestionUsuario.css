@@ -1,4 +1,3 @@
-
 .container {
     display: grid;
     background: transparent;
@@ -16,12 +15,21 @@
     grid-area: gestion;
 }
 
-.dato{
+.dato {
     grid-area: dato;
+    display: grid;
+    grid-template-columns: 0.5fr 2.5fr 0.5fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". form ."
+        ". form ."
+        ". form .";
     align-items: center;
     align-self: center;
 }
-.dato form{
-    
+
+.form {
+    grid-area: form;
     background-color: #00bfff;
 }

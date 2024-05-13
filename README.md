@@ -14,3 +14,5 @@ se deben deben ejecutar loas siguientes lineas
 npm install react-icons --save
 
 npm i react-router-dom
+
+npm i react-data-table-component
