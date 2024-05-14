@@ -17,7 +17,7 @@ export const Login = () => {
     );
     const onLogin = (e) =>{
         e.preventDefault()
-        navigate('/GestionUsuario', {
+        navigate('/HomePagesAdmin', {
             replace: true,
             state: {
                 logged: true,

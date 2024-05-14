@@ -2,16 +2,15 @@ import { Link } from 'react-router-dom';
 import './VerPQRS.css';
 import { MenuUser } from '../../../../../componentes/Menu';
 import { BackGraund } from '../../../../../componentes/BackGraund';
-import { TablaPQRS } from '../../../../../componentes/TablaPQRS';
 
-export const VerPQRS = () => {
+export const GestionPQRS = () => {
     return (
         <div className='VerPQRS'>
             <BackGraund/>
             <MenuUser/>
                 <div className="gestion">
                     <p>
-                        <TablaPQRS/>
+                    <TablaPQRS/>
                     </p>
 
                 </div>

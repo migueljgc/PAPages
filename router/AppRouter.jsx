@@ -10,6 +10,10 @@ import { Registro } from '../src/Pages/Login and Register/Registro';
 import { VerPQRS } from '../src/Pages/Usuarios/User/VerPQRS/VerPQRS';
 import { CrearPQRS } from '../src/Pages/Usuarios/User/CrearPQRS/CrearPQRS';
 import { PageNotFound } from '../componentes/PageNotFound';
+import { GestionPQRS } from '../src/Pages/Usuarios/ResponsibleDependency/GestionPQRS/GestionPQRS';
+import { HomePageSe } from '../src/Pages/Usuarios/ResponsibleDependency/HomePageSe';
+import { HomePageUs } from '../src/Pages/Usuarios/User/HomePageUs';
+import { HomePageAd } from '../src/Pages/Usuarios/Admin/HomePageAd';
 
 export const AppRouter = () => {
   return (
@@ -30,6 +34,10 @@ export const AppRouter = () => {
             <Route path="/VerUsuarios" element={<VerUsuarios />} />
             <Route path="/VerPQRS" element={<VerPQRS />} />
             <Route path="/CrearPQRS" element={<CrearPQRS />} />
+            <Route path="/GestionPQRS" element={<GestionPQRS />} />
+            <Route path="/HomePagesAdmin" element={<HomePageAd />} />
+            <Route path="/HomePagesUser" element={<HomePageUs />} />
+            <Route path="/HomePagesSecre" element={<HomePageSe />} />
           </Route>
         </Route>
       </Routes>

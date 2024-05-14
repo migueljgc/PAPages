@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Registro.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { BackGraund } from '../../../componentes/BackGraund';
 
 export const Registro = () => {
@@ -8,7 +8,6 @@ export const Registro = () => {
         apellido: '',
         correo: '',
         numero: '',
-        rol: 'User',
         usuario: '',
         contraseña: '',
         confirmarContraseña: '',
@@ -17,6 +16,34 @@ export const Registro = () => {
         tipoPersona: '',
     });
 
+    const [identificationTypes, setIdentificationTypes] = useState([]);
+    const [personTypes, setPersonTypes] = useState([]);
+
+    useEffect(() => {
+        const fetchIdentificationTypes = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/identification_type/get');
+                console.log('Tipos de identificación obtenidos:', response.data);
+                setIdentificationTypes(response.data);
+            } catch (error) {
+                console.error('Error al obtener tipos de identificación:', error);
+            }
+        };
+
+        const fetchPersonTypes = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/person_type/get');
+                console.log('Tipos de persona obtenidos:', response.data);
+                setPersonTypes(response.data);
+            } catch (error) {
+                console.error('Error al obtener tipos de persona:', error);
+            }
+        };
+
+        fetchIdentificationTypes();
+        fetchPersonTypes();
+    }, []);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -24,52 +51,69 @@ export const Registro = () => {
         });
     };
 
-    const handleTipoIdentificacion = (e) => {
-        const value = e.target.value;
-        let numericValue;
-
-        if (value === 'C.C') {
-            numericValue = 1;
-        } else if (value === 'T.I') {
-            numericValue = 2;
-        } else if (value === 'P.A') {
-            numericValue = 3;
-        } else {
-            numericValue = 4; // Puedes asignar otro valor numérico aquí
-        }
-
-        setFormData({ ...formData, tipoIdentificacion: numericValue });
-    };
-
-    const handleTipoPersona = (e) => {
-        const value = e.target.value;
-        let numericValue;
-
-        if (value === 'Natural') {
-            numericValue = 1;
-        } else if (value === 'Juridica') {
-            numericValue = 2;
-        } else {
-            numericValue = 3; // Puedes asignar otro valor numérico aquí
-        }
-
-        setFormData({ ...formData, tipoPersona: numericValue });
-    };
+    const handleReset = () => {
+        setFormData({
+            nombre: '',
+            apellido: '',
+            correo: '',
+            numero: '',
+            usuario: '',
+            contraseña: '',
+            confirmarContraseña: '',
+            tipoIdentificacion: '',
+            identificacion: '',
+            tipoPersona: '',
+        });
+    }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData);
+        try {
+            console.log('Datos del formulario a enviar:', formData);
+
+            // Obtener el objeto completo de tipo de identificación seleccionado
+            const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
+
+            // Obtener el objeto completo de tipo de persona seleccionado
+            const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
+
+            const requestData = {
+                personType: { idPersonType: selectedPersonType.idPersonType },
+                name: formData.nombre,
+                lastName: formData.apellido,
+                email: formData.correo,
+                identificationType: { idIdentificationType: selectedIdentificationType.idIdentificationType }, // Enviar el objeto completo
+                identificationNumber: formData.identificacion,
+            };
+
+            const personResponse = await axios.post('http://localhost:8080/api/person/save', requestData);
+            console.log('Respuesta al guardar persona:', personResponse.data);
+            const personId = personResponse.data.idPerson;
+
+            const roleData = { id: 1 }; // Objeto del rol
+            const userResponse = await axios.post('http://localhost:8080/api/user/save', {
+                user: formData.usuario,
+                password: formData.contraseña,
+                person: { idPerson: personId }, // Pasar la persona completa
+                role: roleData, // Pasar el objeto del rol
+            });
+            console.log('Respuesta al guardar usuario:', userResponse.data);
+            console.log('Usuario registrado correctamente');
+        } catch (error) {
+            console.error('Error al guardar información:', error);
+        }
+        handleReset();
     };
 
     return (
         <div className="crearUsuario">
-            <BackGraund />
+            <BackGraund/>
             <div className="fr"><div className=""></div>
                 <div className="formu">
-                    <h1>Resgistro</h1>
-                    <label htmlFor="">¿No tienes una cuenta, Registrate?</label>
+                    <h1>Registro</h1>
+                    <label htmlFor="">¿No tienes una cuenta? Regístrate</label>
                     <form className='formPQRS' onSubmit={handleSubmit}>
                         <div className="input-box1">
                             <label htmlFor="nombre">Nombre:</label><br />
@@ -90,7 +134,7 @@ export const Registro = () => {
                                 value={formData.apellido}
                                 onChange={handleChange}
                             />
-                        </div > <br />
+                        </div> <br />
                         <div className="input-box1">
                             <label htmlFor="correo">Correo:</label><br />
                             <input
@@ -144,33 +188,33 @@ export const Registro = () => {
                         <div className="select-box1">
                             <label htmlFor="tipoPersona">Tipo de Persona:</label><br />
                             <select
-                                type="text"
                                 id="tipoPersona"
                                 name="tipoPersona"
                                 value={formData.tipoPersona}
-                                onChange={handleTipoPersona}>
-
-                                <option value="">Seleccione el tipo</option>
-                                <option value="Natural">Natural</option>
-                                <option value="Juridica">Juridica</option>
-
+                                onChange={handleChange}
+                            >
+                                <option key="" value="">Seleccione el tipo</option>
+                                {personTypes.map((type) => (
+                                    <option key={type.idPersonType} value={type.idPersonType}>
+                                        {type.namePersonType}
+                                    </option>
+                                ))}
                             </select>
                         </div> <br />
                         <div className="select-box1">
                             <label htmlFor="tipoIdentificacion">Tipo de Identificación:</label><br />
-
                             <select
-                                type="text"
                                 id="tipoIdentificacion"
                                 name="tipoIdentificacion"
                                 value={formData.tipoIdentificacion}
-                                onChange={handleTipoIdentificacion}>
-
-                                <option value="">Seleccione Tipo de Identidicacion</option>
-                                <option value="C.C">C.C</option>
-                                <option value="T.I">T.I</option>
-                                <option value="P.A">P.A</option>
-
+                                onChange={handleChange}
+                            >
+                                <option key="" value="">Seleccione Tipo de Identificación</option>
+                                {identificationTypes.map((type) => (
+                                    <option key={type.idIdentificationType} value={type.idIdentificationType}>
+                                        {type.nameIdentificationType}
+                                    </option>
+                                ))}
                             </select>
                         </div> <br />
                         <div className="input-box1">
@@ -187,9 +231,9 @@ export const Registro = () => {
                             <button type="submit">Registrar</button>
                         </div><br />
                     </form>
-                    <p>¿Ya tiene cuenta? <a href="/Login">Inicia Sesion</a></p>
+                    <p>¿Ya tienes cuenta? <a href="/Login">Inicia Sesión</a></p>
                 </div><div className=""></div>
             </div>
         </div>
-    )
-}
+    );
+};
