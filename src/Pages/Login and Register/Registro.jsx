@@ -122,7 +122,7 @@ export const Registro = () => {
                                 id="nombre"
                                 name="nombre"
                                 value={formData.nombre}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -132,7 +132,7 @@ export const Registro = () => {
                                 id="apellido"
                                 name="apellido"
                                 value={formData.apellido}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -142,7 +142,7 @@ export const Registro = () => {
                                 id="correo"
                                 name="correo"
                                 value={formData.correo}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -152,7 +152,7 @@ export const Registro = () => {
                                 id="numero"
                                 name="numero"
                                 value={formData.numero}
-                                onChange={handleChange}
+                                onChange={handleChange}  required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -162,7 +162,7 @@ export const Registro = () => {
                                 id="usuario"
                                 name="usuario"
                                 value={formData.usuario}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -172,7 +172,7 @@ export const Registro = () => {
                                 id="contraseña"
                                 name="contraseña"
                                 value={formData.contraseña}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div> <br />
                         <div className="input-box1">
@@ -182,7 +182,7 @@ export const Registro = () => {
                                 id="confirmarContraseña"
                                 name="confirmarContraseña"
                                 value={formData.confirmarContraseña}
-                                onChange={handleChange}
+                                onChange={handleChange}  required
                             />
                         </div> <br />
                         <div className="select-box1">
@@ -191,7 +191,7 @@ export const Registro = () => {
                                 id="tipoPersona"
                                 name="tipoPersona"
                                 value={formData.tipoPersona}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             >
                                 <option key="" value="">Seleccione el tipo</option>
                                 {personTypes.map((type) => (
@@ -207,7 +207,7 @@ export const Registro = () => {
                                 id="tipoIdentificacion"
                                 name="tipoIdentificacion"
                                 value={formData.tipoIdentificacion}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             >
                                 <option key="" value="">Seleccione Tipo de Identificación</option>
                                 {identificationTypes.map((type) => (
@@ -224,7 +224,7 @@ export const Registro = () => {
                                 id="identificacion"
                                 name="identificacion"
                                 value={formData.identificacion}
-                                onChange={handleChange}
+                                onChange={handleChange} required
                             />
                         </div><br />
                         <div className="btnIniciarSesion">
