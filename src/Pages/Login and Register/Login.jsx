@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import { VscAccount } from "react-icons/vsc";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -7,24 +7,34 @@ import { useNavigate } from 'react-router-dom';
 import {BackGraund} from '../../../componentes/BackGraund'
 
 export const Login = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
 
-    const {usuario , contrasena, onInputChange, onResetForm} = () => useForm(
-        {
-            usuario: '',
-            contrasena: '',
-        }
-    );
-    const onLogin = (e) =>{
-        e.preventDefault()
-        navigate('/HomePagesAdmin', {
-            replace: true,
-            state: {
-                logged: true,
-                usuario
+    const onLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/user/login', {
+                user,
+                password
+            });
+
+            if (response.status === 200) {
+                navigate('/HomePageAdmin', {
+                    replace: true,
+                    state: {
+                        logged: true,
+                        user
+                    }
+                });
+            } else {
+                alert('Credenciales incorrectas');
             }
-        })
-        onResetForm();
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+            alert('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
+        }
     }
     
     return (
@@ -40,11 +50,11 @@ export const Login = () => {
 
                     <div className="input-box">
                         <label htmlFor='usuario'><VscAccount /> Usuario: </label><br />
-                        <input type="text" className='usuario' id='usurio' value={usuario} onChange={onInputChange} required />
+                        <input type="text" className='usuario' id='usurio' value={user} onChange={e => setUser(e.target.value)} required />
                     </div><br />
                     <div className="input-box">
                         <label htmlFor=""><RiLockPasswordLine /> Contraseña: </label><br />
-                        <input type="password" className='contrasena' id='contrasena' value={contrasena}  onChange={onInputChange} required />
+                        <input type="password" className='contrasena' id='contrasena' value={password} onChange={e => setPassword(e.target.value)} required />
                     </div><br />
                     <div className="btnIniciarSesion">
                         <button >
