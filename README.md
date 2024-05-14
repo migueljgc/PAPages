@@ -9,10 +9,12 @@ Currently, two official plugins are available:
 
 
 
-se deben deben ejecutar loas siguientes lineas 
+Se deben deben ejecutar las siguientes lineas para instalar las librearias necesarias: 
 
 npm install react-icons --save
 
 npm i react-router-dom
 
 npm i react-data-table-component
+
+npm i axios
