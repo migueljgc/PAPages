@@ -8,119 +8,57 @@ export const CrearPQRS = () => {
             <BackGraund />
             <MenuUser />
             <div className="fr">
+                <div className=""></div>
                 <div className="formu">
                     <form className='formPQRS'>
-                        <div className="input-box1">
-                            <label htmlFor="nombre">Nombre:</label><br />
-                            <input
-                                type="text"
-                                id="nombre"
-                                name="nombre"
-                            />
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="apellido">Apellido:</label><br />
-                            <input
-                                type="text"
-                                id="apellido"
-                                name="apellido"
-                            />
-                        </div > <br />
-                        <div className="input-box1">
-                            <label htmlFor="correo">Correo:</label><br />
-                            <input
-                                type="email"
-                                id="correo"
-                                name="correo"
-                               
-                            />
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="numero">Número:</label><br />
-                            <input
-                                type="text"
-                                id="numero"
-                                name="numero"
-                                
-                            />
-                        </div> <br />
+                        <p></p>
+                        <h1>Resgistro de PQRS</h1>
                         <div className="select-box1">
-                            <label htmlFor="rol">Rol:</label><br />
+                            <label htmlFor="tipo_Solicitud">Tipo de Solicitud:</label><br />
                             <select
                                 type="text"
-                                id="rol"
-                                name="rol"
-                               >
-
-                                <option value="">Seleccione el rol</option>
-                                <option value="Admin">Administrador</option>
-                                <option value="User">Usuario</option>
-                                <option value="Dependencia">Dependencia</option>
-
-                            </select>
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="usuario">Usuario:</label><br />
-                            <input
-                                type="text"
-                                id="usuario"
-                                name="usuario"
-                            />
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="contraseña">Contraseña:</label><br />
-                            <input
-                                type="password"
-                                id="contraseña"
-                                name="contraseña"
-                            />
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="confirmarContraseña">Confirmar Contraseña:</label><br />
-                            <input
-                                type="password"
-                                id="confirmarContraseña"
-                                name="confirmarContraseña"
-                            />
-                        </div> <br />
-                        <div className="select-box1">
-                            <label htmlFor="tipoPersona">Tipo de Persona:</label><br />
-                            <select
-                                type="text"
-                                id="tipoPersona"
-                                name="tipoPersona">
+                                id="tipo_Solicitud"
+                                name="tipo_Solicitud">
 
                                 <option value="">Seleccione el tipo</option>
                                 <option value="Natural">Natural</option>
                                 <option value="Juridica">Juridica</option>
-
                             </select>
-                        </div> <br />
+                        </div><br />
+                        
                         <div className="select-box1">
-                            <label htmlFor="tipoIdentificacion">Tipo de Identificación:</label><br />
-
+                            <label htmlFor="dependencia">Dependencia:</label><br />
                             <select
                                 type="text"
-                                id="tipoIdentificacion"
-                                name="tipoIdentificacion">
+                                id="dependencia"
+                                name="dependencia">
 
-                                <option value="">Seleccione Tipo de Identidicacion</option>
-                                <option value="C.C">C.C</option>
-                                <option value="T.I">T.I</option>
-                                <option value="P.A">P.A</option>
-
+                                <option value="">Seleccione el tipo</option>
+                                <option value="Natural">Natural</option>
+                                <option value="Juridica">Juridica</option>
                             </select>
-                        </div> <br />
-                        <div className="input-box1">
-                            <label htmlFor="identificacion">Identificación:</label><br />
-                            <input
-                                type="text"
-                                id="identificacion"
-                                name="identificacion"
-                            />
                         </div><br />
-                        <div className="btnIniciarSesion">
-                            <button type="submit">Registrar</button>
+
+                        <div className="select-box1">
+                            <label htmlFor="categoria">Categoria:</label><br />
+                            <select
+                                type="text"
+                                id="categoria"
+                                name="categoria">
+
+                                <option value="">Seleccione el tipo</option>
+                                <option value="Natural">Natural</option>
+                                <option value="Juridica">Juridica</option>
+                            </select>
+                        </div><br />
+                        <div className="input-box1">
+                            <label for="concepto_solicitud">Concepto de Solicitud:</label>
+                            <textarea name="concepto_solicitud" id="concepto_solicitud" rows={"4"} cols={"50"}></textarea>
+                        </div> <br />
+                         
+                         <br />
+                        <div className="enviar">
+                            <button type="submit">Enviar</button>
                         </div><br />
                     </form>
                 </div>
