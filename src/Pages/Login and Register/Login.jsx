@@ -12,36 +12,52 @@ export const Login = () => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+  
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         const storedPassword = localStorage.getItem('password');
-    
+
         if (storedUsername && storedPassword) {
-          setUser(storedUsername);
-          setPassword(storedPassword);
-          setRememberMe(true);
+            setUser(storedUsername);
+            setPassword(storedPassword);
+            setRememberMe(true);
         }
-      }, []);
-      
+    }, []);
+
     const onLogin = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:8080/api/user/login', {
                 user,
-                password
+                password,
             });
 
             if (response.status === 200) {
-
-                navigate('/HomePagesAdmin', {
-                    replace: true,
-                    state: {
-                        logged: true,
-                        user
-                    }
-                });
+                const responseData = response.data;
+                const roleId = responseData.role.id;
+                console.log(roleId);
+                if (roleId === 2){
+                    console.log(roleId);
+                    navigate('/HomePagesAdmin', {
+                        replace: true,
+                        state: {
+                            logged: true,
+                            user,
+                        }
+                    });
+                }
+                else if(roleId === 1){
+                    console.log(roleId);
+                    navigate('/HomePagesUser', {
+                        replace: true,
+                        state: {
+                            logged: true,
+                            user,
+                        }
+                    });
+                }
             } else {
                 alert('Credenciales incorrectas');
             }
@@ -56,7 +72,7 @@ export const Login = () => {
         }
     }
 
-    
+
     return (
         <div className='login'>
             <BackGraund />
