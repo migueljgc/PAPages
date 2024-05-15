@@ -1,34 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import './TablaUsuarios.css'
+import axios from 'axios';
 
-const columns = [
-    {
-        name: 'nombre',
-        selector: row => row.Nombre,
-        sortable: true,
-    },
-    {
-        name: 'apellido',
-        selector: row => row.Apellido,
-        sortable: true,
-    },
-    {
-        name: 'Usuario',
-        selector: row => row.usuario,
-        sortable: true,
-    },
-];
-const data =[
-    {
-        Nombre: "miguel",
-        Apellido: "gaviria",
-        usuario: "migue"
 
-    }
-];
+export const  TablaUsuarios = () => {
+    const [data, setData] = useState([]);
+    useEffect( () => {
+        fetchData();
+    }, []);
+    const fetchData = async () =>{
+        try{
+            const response = await axios.get('http://localhost:8080/api/user/get')
+            setData(response.data);
+        } catch (error){
+            console.error('Error en la data: ', error);
+        }
 
-export const TablaUsuarios = () => {
+    };
+
+    const columns = [
+        {
+            name: 'Nombre',
+            selector: 'nombre_persona',
+            sortable: true,
+        },
+        {
+            name: 'Apellido',
+            selector: 'apellido_persona',
+            sortable: true,
+        },
+        {
+            name: 'Correo',
+            selector: 'correo_persona',
+            sortable: true,
+        },
+    ];
+
+
+
   return (
     <div className='cla'>
         <DataTable 

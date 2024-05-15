@@ -1,20 +1,61 @@
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import DataTable from 'react-data-table-component';
+import axios from 'axios';
 import './GestionUsuario.css';
 import { BackGraund } from '../../../../../componentes/BackGraund';
 import { MenuAdmin } from '../../../../../componentes/Menu';
-import { TablaUsuarios } from '../../../../../componentes/TablaUsuarios';
+
 
 export const GestionUsuario = () => {
+
+    const [data, setData] = useState([]);
+    useEffect( () => {
+        fetchData();
+    }, []);
+    const fetchData = async () =>{
+        try{
+            const response = await axios.get('http://localhost:8080/api/user/get')
+            setData(response.data);
+        } catch (error){
+            console.error('Error en la data: ', error);
+        }
+
+    };
+
+    const columns = [
+        {
+            name: 'Nombre',
+            selector: 'nombre_persona',
+            sortable: true,
+        },
+        {
+            name: 'Apellido',
+            selector: 'apellido_persona',
+            sortable: true,
+        },
+        {
+            name: 'Correo',
+            selector: 'correo_persona',
+            sortable: true,
+        },
+    ];
+
+
+
+
     return (
         <div className='GestionUsuario'>
             <BackGraund />
             <MenuAdmin />
             <div className="container">
                 <div className="gestion">
-                    <p>
-                        <TablaUsuarios />
-                    </p>
+                    <p></p>
+                    <DataTable
+                        columns={columns}
+                        data={data}
+                        fixedHeader
 
+                    />
                 </div>
                 <div className="dato">
                     <div className=""></div>
