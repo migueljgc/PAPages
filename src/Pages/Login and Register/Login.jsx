@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { VscAccount } from "react-icons/vsc";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -6,11 +6,24 @@ import { useNavigate } from 'react-router-dom';
 import { BackGraund } from '../../../componentes/BackGraund';
 import axios from 'axios';
 
+
 export const Login = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
 
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        const storedPassword = localStorage.getItem('password');
+    
+        if (storedUsername && storedPassword) {
+          setUser(storedUsername);
+          setPassword(storedPassword);
+          setRememberMe(true);
+        }
+      }, []);
+      
     const onLogin = async (e) => {
         e.preventDefault();
 
@@ -21,6 +34,7 @@ export const Login = () => {
             });
 
             if (response.status === 200) {
+
                 navigate('/HomePagesAdmin', {
                     replace: true,
                     state: {
@@ -35,8 +49,14 @@ export const Login = () => {
             console.error('Error al iniciar sesión:', error);
             alert('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
         }
+
+        if (rememberMe) {
+            localStorage.setItem('username', user);
+            localStorage.setItem('password', password);
+        }
     }
 
+    
     return (
         <div className='login'>
             <BackGraund />
@@ -58,11 +78,12 @@ export const Login = () => {
                         </div><br />
                         <div className="btnIniciarSesion">
                             <button type="submit">
-                                Iniciar Sesión 
+                                Iniciar Sesión
                             </button>
                         </div><br />
                         <div className="remember-forgod">
-                            <label> <input type="checkbox" />Recuérdame</label>
+                            <label> <input type="checkbox" checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)} /> Recuérdame</label>
                             <a href="/Recuperacion">  ¿Olvidaste tu contraseña?</a>
                         </div>
                         <div className="register">
