@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './CrearPQRS.css';
 import { MenuUser } from '../../../../../componentes/Menu';
 import { BackGraund } from '../../../../../componentes/BackGraund';
@@ -24,18 +26,7 @@ export const CrearPQRS = () => {
             }
         };
 
-        const fetchEstadoTypes = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/request_type/get');
-                console.log('Tipos de estados obtenidos:', response.data);
-                setEstadoTypes(response.data);
-            } catch (error) {
-                console.error('Error al obtener tipos de Estados:', error);
-            }
-        };
-
         fetchCategorias();
-        fetchEstadoTypes();
     }, []);
 
     const handleChange = (e) => {
@@ -47,13 +38,10 @@ export const CrearPQRS = () => {
 
     const handleReset = () => {
         setFormData({
-            id: '',
-            respuesta: '',
             fecha: '',
             descripcion: '',
             medioRespuesta: '',
-            idCategoria: '',
-            estado: '',
+            Categoria: '',
         });
     }
 
@@ -64,20 +52,20 @@ export const CrearPQRS = () => {
             console.log('Datos del formulario a enviar:', formData);
 
             // Obtener el objeto completo de tipo de identificación seleccionado
-            const selectedCategoria = categoriasTypes.find(type => type.idCategoria === parseInt(formData.Categoria));
+            const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.Categoria));
 
 
-            const requestData = {
+            const requestData = await axios.post('http://localhost:8080/api/request/save', {
                 fecha: '',
                 descripcion: formData.descripcion,
                 medioRespuesta: formData.medioRespuesta,
-                Categoria: { idCategoria: selectedCategoria.idCategoria },
-            };
+                Categoria: { idCategory: selectedCategoria.idCategory },
+            });
 
-            const RequestResponse = await axios.post('http://localhost:8080/api/request/save', requestData);
-            console.log('Respuesta al guardar persona:', RequestResponse.data);
+            
+            console.log('Respuesta al guardar persona:', requestData.data);
 
-            console.log('Respuesta al guardar PQRS:', RequestResponse.data);
+            console.log('Respuesta al guardar PQRS:', requestData.data);
             console.log('Usuario registrado correctamente');
         } catch (error) {
             console.error('Error al guardar información:', error);
@@ -114,8 +102,8 @@ export const CrearPQRS = () => {
                             <label htmlFor="dependencia">Medio de Respuesta:</label><br />
                             <select
                                 type="text"
-                                id="MedioRespuesta"
-                                name="MedioRespuesta"
+                                id="medioRespuesta"
+                                name="medioRespuesta"
                                 value={formData.medioRespuesta}
                                 onChange={handleChange} required>
 
@@ -130,19 +118,21 @@ export const CrearPQRS = () => {
                             <select
                                 type="text"
                                 id="categoria"
-                                name="categoria">
+                                name="categoria"
+                                value={formData.Categoria}
+                                onChange={handleChange} required>
 
                                 <option key="" value="">Seleccione el tipo</option>
                                 {categoriasTypes.map((type) => (
-                                    <option key={type.idCategoria} value={type.idCategoria}>
+                                    <option key={type.idCategory} value={type.idCategory}>
                                         {type.nameCategory}
                                     </option>
                                     ))}
                             </select>
                         </div><br />
                         <div className="input-box1">
-                            <label for="concepto_solicitud">Concepto de Solicitud:</label>
-                            <textarea name="concepto_solicitud" id="concepto_solicitud" rows={"4"} cols={"50"}
+                            <label htmlFor="descripcion">Concepto de Solicitud:</label>
+                            <textarea name="descripcion" id="descripcion" rows={"4"} cols={"50"}
                                 value={formData.descripcion}
                                 onChange={handleChange} required></textarea>
                         </div> <br />
