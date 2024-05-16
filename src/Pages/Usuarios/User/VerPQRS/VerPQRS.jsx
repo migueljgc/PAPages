@@ -1,36 +1,63 @@
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import './VerPQRS.css';
 import { MenuUser } from '../../../../../componentes/Menu';
 import { BackGraund } from '../../../../../componentes/BackGraund';
 import DataTable from 'react-data-table-component';
 
-const columns = [
-    {
-        name: 'Id solicitud',
-        selector: row => row.Id_solicitud,
-        sortable: true,
-    },
-    {
-        name: 'Fecha solicitud',
-        selector: row => row.fecha_solicitud,
-        sortable: true,
-    },
-    {
-        name: 'Concepto solicitud',
-        selector: row => row.concepto_solicitud,
-        sortable: true,
-    },
-    
-];
-const data =[
-    {
-        Id_solicitud: "",
-        fecha_solicitud: "",
-        concepto_solicitud: ""
 
-    }
-];
 export const VerPQRS = () => {
+    const [data, setData] = useState([]);
+    useEffect( () => {
+        fetchData();
+    }, []);
+    const fetchData = async () =>{
+        try{
+            const response = await axios.get('http://localhost:8080/api/request/get')
+            setData(response.data);
+            console.log(response.data)
+        } catch (error){
+            console.error('Error en la data: ', error);
+        }
+
+    };
+
+    const columns=[
+        {
+            name: 'Categoria',
+            selector: row => row.category.nameCategory
+        },
+        {
+            name: 'Descripcion',
+            selector: row => row.description
+        },
+        {
+            name: 'Fecha',
+            selector: row => row.date
+        },
+        {
+            name: 'Tipo de Solicitud',
+            selector: row => row.requestType.nameRequestType
+        },
+        {
+            name: 'Medio de Respuesta',
+            selector: row => row.mediumAnswer
+
+        },
+        {
+            name: 'Respuesta',
+            selector: row => row.answer
+        },
+        {
+            name: 'Estado',
+            selector: row => row.requestState
+        },
+        
+        
+    ]
+
+
+
     return (
         <div className='VerPQRS'>
             <BackGraund />
