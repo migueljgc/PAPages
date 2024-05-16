@@ -14,34 +14,41 @@ export const GestionUsuario = () => {
     }, []);
     const fetchData = async () =>{
         try{
-            const response = await axios.get('http://localhost:8080/api/user/get')
+            const response = await axios.get('http://localhost:8080/api/person/get')
             setData(response.data);
+            console.log(response.data)
         } catch (error){
             console.error('Error en la data: ', error);
         }
 
     };
-
-    const columns = [
+    const columns=[
         {
             name: 'Nombre',
-            selector: 'nombre_persona',
-            sortable: true,
+            selector: row => row.name
         },
         {
             name: 'Apellido',
-            selector: 'apellido_persona',
-            sortable: true,
+            selector: row => row.lastName
+        },
+        {
+            name: 'Tipo de Identificacion',
+            selector: row => row.identificationType.nameIdentificationType
+        },
+        {
+            name: 'Identificacion',
+            selector: row => row.identificationNumber
         },
         {
             name: 'Correo',
-            selector: 'correo_persona',
-            sortable: true,
+            selector: row => row.email
         },
-    ];
+        {
+            name: 'Tipo de Persona',
+            selector: row => row.personType.namePersonType
 
-
-
+        },
+    ]
 
     return (
         <div className='GestionUsuario'>
@@ -132,7 +139,7 @@ export const GestionUsuario = () => {
                     </div>
                     <div className=""></div>
                 </div>
-            </div>
+            </div> 
 
 
         </div>
