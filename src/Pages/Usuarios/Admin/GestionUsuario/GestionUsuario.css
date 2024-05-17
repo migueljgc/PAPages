@@ -33,3 +33,18 @@
     grid-area: form;
     background-color: #00bfff;
 }
+.check-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: green;
+    font-size: 1.5em;
+}
+
+.check-button.selected {
+    color: darkgreen;
+}
+
+.check-button:hover {
+    color: darkgreen;
+}

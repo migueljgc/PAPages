@@ -5,7 +5,6 @@ import { MenuUser } from '../../../../../componentes/Menu';
 import { BackGraund } from '../../../../../componentes/BackGraund';
 
 export const CrearPQRS = () => {
-
     const [formData, setFormData] = useState({
         medioRespuesta: '',
         answer: '',
@@ -17,13 +16,10 @@ export const CrearPQRS = () => {
         requestState: '',
         requestType: '',
         user: '',
-
     });
 
     const [categoriasTypes, setCategorias] = useState([]);
-    const [date, setFecha] = useState([]);
     const [requestType, setRequest] = useState([]);
-
 
     useEffect(() => {
         const fetchCategorias = async () => {
@@ -35,6 +31,7 @@ export const CrearPQRS = () => {
                 console.error('Error al obtener categorias:', error);
             }
         };
+
         const fetchRequest = async () => {
             try {
                 const response1 = await axios.get('http://localhost:8080/api/request_type/get');
@@ -47,31 +44,43 @@ export const CrearPQRS = () => {
 
         const obtenerFecha = () => {
             const fechaActual = new Date();
-            const fechaFormat = fechaActual.toISOString().slice(0, 10);
-            setFecha(fechaFormat);
+            const fechaFormat = fechaActual.toISOString().slice(0, 10); // YYYY-MM-DD
+            const fechaTexto = fechaActual.toDateString(); // Mon May 16 2024
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                date: fechaTexto,
+            }));
+        };
 
-        }
         fetchRequest();
         fetchCategorias();
         obtenerFecha();
     }, []);
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
     };
 
     const handleReset = () => {
+        const fechaActual = new Date();
+        const fechaTexto = fechaActual.toDateString();
         setFormData({
-            fecha: '',
-            description: '',
-            mediumAnswer: '',
+            medioRespuesta: '',
+            answer: '',
             category: '',
+            date: fechaTexto,
+            description: '',
+            idRequest: '',
+            mediumAnswer: '',
+            requestState: '',
             requestType: '',
+            user: '',
         });
-    }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -79,20 +88,20 @@ export const CrearPQRS = () => {
         try {
             console.log('Datos del formulario a enviar:', formData);
 
-            // Obtener el objeto completo de categorias seleccionado
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
 
-            const estadoData = { idRequestState:1 };
+            const estadoData = { idRequestState: 1 };
             const requestData = {
-                fecha: '',
+                fecha: formData.date,
                 description: formData.description,
                 mediumAnswer: formData.mediumAnswer,
-                category: { idCategory: selectedCategoria.idCategory },
-                requestType: { idRequestType: selectedRequestType.idRequestType },
+                category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
+                requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
                 requestState: estadoData,
             };
-            const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData)
+
+            const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData);
             console.log('Respuesta al guardar PQRS:', respuesta.data);
             console.log('PQRS registrada correctamente');
         } catch (error) {
@@ -100,8 +109,6 @@ export const CrearPQRS = () => {
         }
         handleReset();
     };
-
-
 
     return (
         <div className='CrearPQRS'>
@@ -112,43 +119,47 @@ export const CrearPQRS = () => {
                 <div className="formu">
                     <form className='formPQRS' onSubmit={handleSubmit}>
                         <p></p>
-                        <h1>Resgistro de PQRS</h1>
+                        <h1>Registro de PQRS</h1>
                         <div className="select-box1">
                             <label htmlFor="requestType">Tipo de Solicitud:</label><br />
                             <select
                                 id="requestType"
                                 name="requestType"
                                 value={formData.requestType}
-                                onChange={handleChange} required>
-
+                                onChange={handleChange}
+                                required
+                            >
                                 <option key="" value="">Seleccione el tipo</option>
                                 {requestType.map((type) => (
                                     <option key={type.idRequestType} value={type.idRequestType}>
                                         {type.nameRequestType}
                                     </option>
                                 ))}
-
                             </select>
                         </div><br />
 
                         <div className="input-box1">
-                            <label htmlFor="fecha">Frcha:</label>
-                            <input type='date' name="date" id="date" rows={"4"} cols={"50"}
-                                value={date}
-                                onChange={(e) => setFecha(e.target.value)}
+                            <label htmlFor="date">Fecha:</label>
+                            <input
+                                type="text"
+                                name="date"
+                                id="date"
+                                value={formData.date}
+                                onChange={handleChange}
                                 readOnly
-                                required />
-                        </div> <br />
+                                required
+                            />
+                        </div><br />
 
                         <div className="select-box1">
                             <label htmlFor="mediumAnswer">Medio de Respuesta:</label><br />
                             <select
-                                type="mediumAnswer"
                                 id="mediumAnswer"
                                 name="mediumAnswer"
                                 value={formData.mediumAnswer}
-                                onChange={handleChange} required>
-
+                                onChange={handleChange}
+                                required
+                            >
                                 <option value="">Seleccione el tipo</option>
                                 <option value="Correo">Correo</option>
                                 <option value="Numero">Numero</option>
@@ -161,8 +172,9 @@ export const CrearPQRS = () => {
                                 id="category"
                                 name="category"
                                 value={formData.category}
-                                onChange={handleChange} required>
-
+                                onChange={handleChange}
+                                required
+                            >
                                 <option key="" value="">Seleccione el tipo</option>
                                 {categoriasTypes.map((type) => (
                                     <option key={type.idCategory} value={type.idCategory}>
@@ -171,19 +183,26 @@ export const CrearPQRS = () => {
                                 ))}
                             </select>
                         </div><br />
+
                         <div className="input-box1">
                             <label htmlFor="description">Concepto de Solicitud:</label>
-                            <textarea name="description" id="description" rows={"4"} cols={"50"}
+                            <textarea
+                                name="description"
+                                id="description"
+                                rows="4"
+                                cols="50"
                                 value={formData.description}
-                                onChange={handleChange} required></textarea>
-                        </div> <br />
+                                onChange={handleChange}
+                                required
+                            ></textarea>
+                        </div><br />
 
-                        <br />
                         <div className="enviar">
                             <button type="submit">Enviar</button>
                         </div><br />
                     </form>
                 </div>
             </div>
-        </div>)
-}
+        </div>
+    );
+};

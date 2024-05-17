@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from '../Navbar';
 import { Login } from '../src/Pages/Login and Register/Login';
 import { GestionUsuario } from '../src/Pages/Usuarios/Admin/GestionUsuario/GestionUsuario';
