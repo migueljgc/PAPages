@@ -8,9 +8,7 @@ import DataTable from 'react-data-table-component';
 
 export const VerPQRS = () => {
     const [data, setData] = useState([]);
-    useEffect( () => {
-        fetchData();
-    }, []);
+    
     const fetchData = async () =>{
         try{
             const response = await axios.get('http://localhost:8080/api/request/get')
@@ -21,7 +19,9 @@ export const VerPQRS = () => {
         }
 
     };
-
+useEffect( () => {
+        fetchData();
+    }, []);
     const columns=[
         {
             name: 'Categoria',
@@ -50,7 +50,7 @@ export const VerPQRS = () => {
         },
         {
             name: 'Estado',
-            selector: row => row.requestState
+            selector: row => row.requestState.nameRequestState
         },
         
         
