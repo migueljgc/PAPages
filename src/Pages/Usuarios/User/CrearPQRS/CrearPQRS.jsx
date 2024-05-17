@@ -83,14 +83,14 @@ export const CrearPQRS = () => {
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
 
-            // const estadoData = { idRequestType: 1 }; 
+            const estadoData = { idRequestState:1 };
             const requestData = {
                 fecha: '',
                 description: formData.description,
                 mediumAnswer: formData.mediumAnswer,
                 category: { idCategory: selectedCategoria.idCategory },
                 requestType: { idRequestType: selectedRequestType.idRequestType },
-                // requestState: estadoData,
+                requestState: estadoData,
             };
             const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData)
             console.log('Respuesta al guardar PQRS:', respuesta.data);
