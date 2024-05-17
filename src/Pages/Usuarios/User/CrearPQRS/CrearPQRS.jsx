@@ -79,20 +79,23 @@ export const CrearPQRS = () => {
         try {
             console.log('Datos del formulario a enviar:', formData);
 
-            // Obtener el objeto completo de categorias seleccionado
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
-
+            const StateRequest = { idRequestState: 1 };
             const requestData = {
                 fecha: '',
                 description: formData.description,
                 mediumAnswer: formData.mediumAnswer,
                 category: { idCategory: selectedCategoria.idCategory },
-                requestType: { idRequestType: selectedRequestType.idRequestType }
+                requestType: { idRequestType: selectedRequestType.idRequestType },
+                requestState: StateRequest,
             };
             const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData)
             console.log('Respuesta al guardar PQRS:', respuesta.data);
             console.log('PQRS registrada correctamente');
+                const responseData = respuesta.data;
+                const numRadicado = responseData.idRequest;
+            alert('Solicitud Radicada Con Exito Su Numero De Radicado es: ' + numRadicado);
         } catch (error) {
             console.error('Error al guardar información:', error);
         }

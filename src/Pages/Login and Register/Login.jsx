@@ -6,13 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { BackGraund } from '../../../componentes/BackGraund';
 import axios from 'axios';
 
-
 export const Login = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-  
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -37,9 +35,14 @@ export const Login = () => {
             if (response.status === 200) {
                 const responseData = response.data;
                 const roleId = responseData.role.id;
-                console.log(roleId);
-                if (roleId === 2){
-                    console.log(roleId);
+                const stateUser = responseData.stateUser;
+
+                if (stateUser === "Inactivo") {
+                    alert('Usuario Inactivo');
+                    return;
+                }
+
+                if (roleId === 2 && stateUser === "Activo") {
                     navigate('/HomePagesAdmin', {
                         replace: true,
                         state: {
@@ -47,9 +50,7 @@ export const Login = () => {
                             user,
                         }
                     });
-                }
-                else if(roleId === 1){
-                    console.log(roleId);
+                } else if (roleId === 1 && stateUser === "Activo") {
                     navigate('/HomePagesUser', {
                         replace: true,
                         state: {
@@ -62,8 +63,8 @@ export const Login = () => {
                 alert('Credenciales incorrectas');
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            alert('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
+            console.error('Error al obtener los datos de la base de datos:', error);
+            alert('Usuario y/o Contraseña Incorrectos');
         }
 
         if (rememberMe) {
@@ -71,7 +72,6 @@ export const Login = () => {
             localStorage.setItem('password', password);
         }
     }
-
 
     return (
         <div className='login'>
@@ -111,6 +111,5 @@ export const Login = () => {
         </div>
     );
 };
-
 
 
