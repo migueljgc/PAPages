@@ -94,7 +94,8 @@ export const Registro = () => {
                 user: formData.usuario,
                 password: formData.contraseña,
                 person: { idPerson: personId }, 
-                role: roleData, 
+                role: roleData,
+                stateUser: "Activo" 
             });
             console.log('Respuesta al guardar usuario:', userResponse.data);
             console.log('Usuario registrado correctamente');
