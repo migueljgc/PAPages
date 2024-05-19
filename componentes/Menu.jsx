@@ -15,9 +15,9 @@ export const MenuAdmin = () => {
                         <input type="checkbox" id="btn-nav" />
                         <nav>
                             <ul className="men">
-                                <li><a href="/GestionUsuario"> Gestion de Usuario </a></li>
+                                <li><a href="/EdicionPersona"> Edicion de Persona </a></li>
                                 <li><a href="/CrearUsuario">Crear Usuario </a></li>
-                                <li><a href="/VerUsuarios"> Ver Usuarios </a></li>
+                                <li><a href="/edicionUsuarios"> Edicion Usuarios </a></li>
 
                             </ul>
                         </nav>

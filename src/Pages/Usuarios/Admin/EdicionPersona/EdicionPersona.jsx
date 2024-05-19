@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
-import './GestionUsuario.css';
+import './EdicionPersona.css';
 import { BackGraund } from '../../../../../componentes/BackGraund';
 import { MenuAdmin } from '../../../../../componentes/Menu';
 import { FaCheck } from 'react-icons/fa';
 
-export const GestionUsuario = () => {
+export const EdicionPersona = () => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [personTypes, setPersonTypes] = useState([]);
@@ -111,7 +111,7 @@ export const GestionUsuario = () => {
     ];
 
     return (
-        <div className='GestionUsuario'>
+        <div className='EdicionPersona'>
             <BackGraund />
             <MenuAdmin />
             <div className="container">

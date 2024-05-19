@@ -43,3 +43,6 @@ button{
     border-radius: 40px;
     font-weight: 800;
  }
+.input-box1 textarea{
+    border-radius: 0;
+ }

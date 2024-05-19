@@ -1,10 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from '../Navbar';
 import { Login } from '../src/Pages/Login and Register/Login';
-import { GestionUsuario } from '../src/Pages/Usuarios/Admin/GestionUsuario/GestionUsuario';
+import { EdicionPersona } from '../src/Pages/Usuarios/Admin/EdicionPersona/EdicionPersona';
 import { EditarPerfilAdmin, EditarPerfilSecre, EditarPerfilUser } from '../componentes/EditarPerfil';
 import { CrearUsuario } from '../src/Pages/Usuarios/Admin/CrearUsuario/CrearUsuario';
-import { VerUsuarios } from '../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios';
 import { Recovery } from '../componentes/Recovery';
 import { Registro } from '../src/Pages/Login and Register/Registro';
 import { VerPQRS } from '../src/Pages/Usuarios/User/VerPQRS/VerPQRS';
@@ -14,6 +13,7 @@ import { GestionPQRS } from '../src/Pages/Usuarios/ResponsibleDependency/Gestion
 import { HomePageSe } from '../src/Pages/Usuarios/ResponsibleDependency/HomePageSe';
 import { HomePageUs } from '../src/Pages/Usuarios/User/HomePageUs';
 import { HomePageAd } from '../src/Pages/Usuarios/Admin/HomePageAd';
+import { EdicionUsuarios } from '../src/Pages/Usuarios/Admin/edicionUsuarios/edicionUsuarios';
 
 export const AppRouter = () => {
   return (
@@ -26,12 +26,12 @@ export const AppRouter = () => {
           <Route path="/Registro" element={<Registro />} />
           <Route path="*" element={<PageNotFound />} />
           <Route element={<Navbar />}>
-            <Route path="/GestionUsuario" element={<GestionUsuario />} />
+            <Route path="/EdicionPersona" element={<EdicionPersona />} />
             <Route path="/EditarPerfilAdmin" element={<EditarPerfilAdmin />} />
             <Route path="/EditarPerfilUser" element={<EditarPerfilUser />} />
             <Route path="/EditarPerfilSecre" element={<EditarPerfilSecre />} />
             <Route path="/CrearUsuario" element={<CrearUsuario />} />
-            <Route path="/VerUsuarios" element={<VerUsuarios />} />
+            <Route path="/EdicionUsuarios" element={<EdicionUsuarios />} />
             <Route path="/VerPQRS" element={<VerPQRS />} />
             <Route path="/CrearPQRS" element={<CrearPQRS />} />
             <Route path="/GestionPQRS" element={<GestionPQRS />} />
