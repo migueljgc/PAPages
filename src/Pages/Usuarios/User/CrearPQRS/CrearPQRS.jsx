@@ -16,10 +16,14 @@ export const CrearPQRS = () => {
         requestState: '',
         requestType: '',
         user: '',
+        dependencia: '', // Nuevo estado para almacenar la dependencia seleccionada
     });
 
     const [categoriasTypes, setCategorias] = useState([]);
+    const [date, setFecha] = useState('');
     const [requestType, setRequest] = useState([]);
+    const [dependencias, setDependencias] = useState([]); // Nuevo estado para almacenar las dependencias
+    const [filteredCategorias, setFilteredCategorias] = useState([]);
 
     useEffect(() => {
         const fetchCategorias = async () => {
@@ -42,27 +46,55 @@ export const CrearPQRS = () => {
             }
         };
 
+        const fetchDependencias = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/dependence/get');
+                console.log('Dependencias obtenidas:', response.data);
+                setDependencias(response.data);
+            } catch (error) {
+                console.error('Error al obtener dependencias:', error);
+            }
+        };
+
         const obtenerFecha = () => {
             const fechaActual = new Date();
-            const fechaFormat = fechaActual.toISOString().slice(0, 10); // YYYY-MM-DD
-            const fechaTexto = fechaActual.toDateString(); // Mon May 16 2024
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                date: fechaTexto,
-            }));
+            const fechaFormat = fechaActual.toISOString().slice(0, 10);
+            setFecha(fechaFormat);
+            setFormData(prevFormData => ({ ...prevFormData, date: fechaFormat })); // Actualizar formData con la fecha
         };
 
         fetchRequest();
         fetchCategorias();
+        fetchDependencias();
         obtenerFecha();
     }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
+
+        if (name === 'dependencia') {
+            const dependenciaId = Number(value); // Asegurar que dependenciaId sea un número
+            console.log('ID de la dependencia seleccionada:', dependenciaId);
+
+            setFormData(prevState => ({
+                ...prevState,
+                dependencia: value,
+            }));
+
+            // Filtrar las categorías basadas en la dependencia seleccionada
+            const filtered = categoriasTypes.filter(cat => {
+                console.log('Categoria actual:', cat); // Log de cada categoría
+                return cat.dependence.idDependence === dependenciaId;
+            });
+
+            console.log('Categorías filtradas:', filtered);
+            setFilteredCategorias(filtered);
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     };
 
     const handleReset = () => {
@@ -78,7 +110,7 @@ export const CrearPQRS = () => {
             mediumAnswer: '',
             requestState: '',
             requestType: '',
-            user: '',
+            dependencia: '', 
         });
     };
 
@@ -90,20 +122,21 @@ export const CrearPQRS = () => {
 
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
-
-            const estadoData = { idRequestState: 1 };
+            const StateRequest = { idRequestState: 1 };
             const requestData = {
                 fecha: formData.date,
                 description: formData.description,
                 mediumAnswer: formData.mediumAnswer,
                 category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
                 requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
-                requestState: estadoData,
+                requestState: StateRequest,
             };
-
             const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData);
             console.log('Respuesta al guardar PQRS:', respuesta.data);
             console.log('PQRS registrada correctamente');
+            const responseData = respuesta.data;
+            const numRadicado = responseData.idRequest;
+            alert('Solicitud Radicada Con Exito Su Numero De Radicado es: ' + numRadicado);
         } catch (error) {
             console.error('Error al guardar información:', error);
         }
@@ -120,6 +153,10 @@ export const CrearPQRS = () => {
                     <form className='formPQRS' onSubmit={handleSubmit}>
                         <p></p>
                         <h1>Registro de PQRS</h1>
+
+                        {/* Campo oculto para la fecha */}
+                        <input type='hidden' name="date" value={date} />
+
                         <div className="select-box1">
                             <label htmlFor="requestType">Tipo de Solicitud:</label><br />
                             <select
@@ -138,31 +175,19 @@ export const CrearPQRS = () => {
                             </select>
                         </div><br />
 
-                        <div className="input-box1">
-                            <label htmlFor="date">Fecha:</label>
-                            <input
-                                type="text"
-                                name="date"
-                                id="date"
-                                value={formData.date}
-                                onChange={handleChange}
-                                readOnly
-                                required
-                            />
-                        </div><br />
-
                         <div className="select-box1">
-                            <label htmlFor="mediumAnswer">Medio de Respuesta:</label><br />
+                            <label htmlFor="dependencia">Dependencia:</label><br />
                             <select
-                                id="mediumAnswer"
-                                name="mediumAnswer"
-                                value={formData.mediumAnswer}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Seleccione el tipo</option>
-                                <option value="Correo">Correo</option>
-                                <option value="Numero">Numero</option>
+                                id="dependencia"
+                                name="dependencia"
+                                value={formData.dependencia}
+                                onChange={handleChange} required>
+                                <option key="" value="">Seleccione la dependencia</option>
+                                {dependencias.map((dep) => (
+                                    <option key={dep.idDependence} value={dep.idDependence}>
+                                        {dep.nameDependence}
+                                    </option>
+                                ))}
                             </select>
                         </div><br />
 
@@ -175,12 +200,26 @@ export const CrearPQRS = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <option key="" value="">Seleccione el tipo</option>
-                                {categoriasTypes.map((type) => (
+                                <option key="" value="">Seleccione la categoría</option>
+                                {filteredCategorias.map((type) => (
                                     <option key={type.idCategory} value={type.idCategory}>
                                         {type.nameCategory}
                                     </option>
                                 ))}
+                            </select>
+                        </div><br />
+
+                        <div className="select-box1">
+                            <label htmlFor="mediumAnswer">Medio de Respuesta:</label><br />
+                            <select
+                                type="mediumAnswer"
+                                id="mediumAnswer"
+                                name="mediumAnswer"
+                                value={formData.mediumAnswer}
+                                onChange={handleChange} required>
+                                <option value="">Seleccione el tipo</option>
+                                <option value="Correo">Correo</option>
+                                <option value="Numero">Numero</option>
                             </select>
                         </div><br />
 
