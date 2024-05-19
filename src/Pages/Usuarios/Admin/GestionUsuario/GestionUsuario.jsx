@@ -9,9 +9,11 @@ import { FaCheck } from 'react-icons/fa';
 export const GestionUsuario = () => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [personTypes, setPersonTypes] = useState([]);
 
     useEffect(() => {
         fetchData();
+        fetchPersonTypes();
     }, []);
 
     const fetchData = async () => {
@@ -21,6 +23,15 @@ export const GestionUsuario = () => {
             console.log(response.data);
         } catch (error) {
             console.error('Error en la data: ', error);
+        }
+    };
+
+    const fetchPersonTypes = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/person_type/get');
+            setPersonTypes(response.data);
+        } catch (error) {
+            console.error('Error al obtener tipos de persona: ', error);
         }
     };
 
@@ -36,18 +47,25 @@ export const GestionUsuario = () => {
         }));
     };
 
-    // const handleUpdate = async () => {
-    //     if (selectedItem) {
-    //         try {
-    //             await axios.put('http://localhost:8080/api/person/update/${selectedItem.id', selectedItem);
-    //             fetchData(); // Vuelve a cargar los datos para reflejar los cambios
-    //             alert('Datos actualizados correctamente');
-    //         } catch (error) {
-    //             console.error('Error actualizando los datos: ', error);
-    //             alert('Error actualizando los datos');
-    //         }
-    //     }
-    // };
+    const handleUpdate = async () => {
+        if (selectedItem) {
+            try {
+                const updatedItem = {
+                    ...selectedItem,
+                    personType: personTypes.find(
+                        (type) => type.namePersonType === selectedItem.personType
+                    ),
+                };
+                await axios.put(`http://localhost:8080/api/person/update/${selectedItem.idPerson}`, updatedItem);
+                fetchData(); // Vuelve a cargar los datos para reflejar los cambios
+                alert('Datos actualizados correctamente');
+            } catch (error) {
+                console.error('Error actualizando los datos: ', error);
+                alert('Error actualizando los datos');
+            }
+        }
+    };
+
 
     const handleSelect = (row) => {
         setSelectedItem(row);
@@ -89,7 +107,7 @@ export const GestionUsuario = () => {
             name: 'Tipo de Persona',
             selector: row => row.personType.namePersonType,
         },
-        
+
     ];
 
     return (
@@ -157,11 +175,11 @@ export const GestionUsuario = () => {
                                         value={selectedItem.personType.namePersonType}
                                         onChange={handleFormChange}
                                     >
-                                        <option value="Natural">Natural</option>
-                                        <option value="Juridica">Juridica</option>
+                                        <option value='Persona Natural'>Persona Natural</option>
+                                        <option value='Persona Juridica'>Persona Juridica</option>
                                     </select>
                                 </div> <br />
-                                {/* <button type="button" onClick={handleUpdate}>Actualizar</button> */}
+                                <button type="button" onClick={handleUpdate}>Actualizar</button>
                             </form>
                         )}
                     </div>

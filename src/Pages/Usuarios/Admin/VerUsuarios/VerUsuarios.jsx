@@ -29,6 +29,10 @@ export  const VerUsuarios = () => {
             name: 'Contraseña',
             selector: row => row.password
         },
+        {
+            name: 'Estdo de Usuario',
+            selector: row => row.stateUser
+        },
     ]
 return(
     <div className="verUsuarios">

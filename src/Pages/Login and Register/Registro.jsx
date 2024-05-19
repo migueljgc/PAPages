@@ -26,7 +26,7 @@ export const Registro = () => {
                 console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
-                console.error('Error al obtener tipos de identificación:', error);
+                console.error('Error al obtener tipos de identificación de la base de datos', error);
             }
         };
 
@@ -36,7 +36,7 @@ export const Registro = () => {
                 console.log('Tipos de persona obtenidos:', response.data);
                 setPersonTypes(response.data);
             } catch (error) {
-                console.error('Error al obtener tipos de persona:', error);
+                console.error('Error al obtener tipos de persona de la base de datos', error);
             }
         };
 
@@ -73,10 +73,7 @@ export const Registro = () => {
         try {
             console.log('Datos del formulario a enviar:', formData);
 
-            // Obtener el objeto completo de tipo de identificación seleccionado
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
-
-            // Obtener el objeto completo de tipo de persona seleccionado
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
 
             const requestData = {
@@ -92,17 +89,20 @@ export const Registro = () => {
             console.log('Respuesta al guardar persona:', personResponse.data);
             const personId = personResponse.data.idPerson;
 
-            const roleData = { id: 1 }; // Objeto del rol
+            const roleData = { id: 2 }; // Objeto del rol
+            const estadoUsuario = 'Activo';
             const userResponse = await axios.post('http://localhost:8080/api/user/save', {
                 user: formData.usuario,
                 password: formData.contraseña,
-                person: { idPerson: personId }, // Pasar la persona completa
-                role: roleData, // Pasar el objeto del rol
+                person: { idPerson: personId }, 
+                role: roleData, 
+                stateUser: estadoUsuario,
             });
             console.log('Respuesta al guardar usuario:', userResponse.data);
             console.log('Usuario registrado correctamente');
+            alert('Usuario Registrado Correctamente');
         } catch (error) {
-            console.error('Error al guardar información:', error);
+            console.error('Error al guardar información en la base de datos', error);
         }
         handleReset();
     };

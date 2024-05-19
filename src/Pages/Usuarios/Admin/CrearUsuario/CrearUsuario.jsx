@@ -95,6 +95,7 @@ export const CrearUsuario = () => {
             // Obtener el objeto completo de tipo de identificación seleccionado
             const selectedRolesType = rolesTypes.find(type => type.id === parseInt(formData.rol));
 
+            const estadoUsuario = 'Activo';
             const requestData = {
                 personType: { idPersonType: selectedPersonType.idPersonType },
                 name: formData.nombre,
@@ -102,6 +103,7 @@ export const CrearUsuario = () => {
                 email: formData.correo,
                 identificationType: { idIdentificationType: selectedIdentificationType.idIdentificationType }, // Enviar el objeto completo
                 identificationNumber: formData.identificacion,
+                stateUser: estadoUsuario,
             };
 
             const personResponse = await axios.post('http://localhost:8080/api/person/save', requestData);
