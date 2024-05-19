@@ -4,7 +4,7 @@ import { MenuAdmin } from "../../../../../componentes/Menu";
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
-export  const EdicionUsuarios = () => {
+export  const VerUsuarios = () => {
     const [data, setData] = useState([]);
     
     const fetchData = async () =>{
@@ -35,7 +35,7 @@ export  const EdicionUsuarios = () => {
         },
     ]
 return(
-    <div className="edicionUsuarios">
+    <div className="VerUsuarios">
         <BackGraund />
         <MenuAdmin/>
         <DataTable

@@ -15,9 +15,13 @@ export const MenuAdmin = () => {
                         <input type="checkbox" id="btn-nav" />
                         <nav>
                             <ul className="men">
-                                <li><a href="/EdicionPersona"> Edicion de Persona </a></li>
+                                <li><a href="/VerUsuario"> Ver Usuario </a></li>
                                 <li><a href="/CrearUsuario">Crear Usuario </a></li>
-                                <li><a href="/edicionUsuarios"> Edicion Usuarios </a></li>
+                                <li><a href="/EdicionUsuarios"> Edicion Usuarios </a></li>
+                                <li><a href="/TiposCategoria"> Tipos de Categoria </a></li>
+                                <li><a href="/TiposDependencia"> Tipos de Dependencia </a></li>
+                                <li><a href="/TiposIdentificacion"> Tipos de Identificacion </a></li>
+                                <li><a href="/TiposSolicitud"> Tipos de Solicitud </a></li>
 
                             </ul>
                         </nav>

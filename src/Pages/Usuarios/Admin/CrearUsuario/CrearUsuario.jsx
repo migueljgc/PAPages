@@ -142,7 +142,6 @@ export const CrearUsuario = () => {
             <div className="fr"><div className=""></div>
                 <div className="formu">
                     <h1>Registro</h1>
-                    <label htmlFor="">¿No tienes una cuenta? Regístrate</label>
                     <form className='formPQRS' onSubmit={handleSubmit}>
                         <div className="input-box1">
                             <label htmlFor="nombre">Nombre:</label><br />

@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from '../Navbar';
 import { Login } from '../src/Pages/Login and Register/Login';
-import { EdicionPersona } from '../src/Pages/Usuarios/Admin/EdicionPersona/EdicionPersona';
 import { EditarPerfilAdmin, EditarPerfilSecre, EditarPerfilUser } from '../componentes/EditarPerfil';
 import { CrearUsuario } from '../src/Pages/Usuarios/Admin/CrearUsuario/CrearUsuario';
 import { Recovery } from '../componentes/Recovery';
@@ -13,7 +12,12 @@ import { GestionPQRS } from '../src/Pages/Usuarios/ResponsibleDependency/Gestion
 import { HomePageSe } from '../src/Pages/Usuarios/ResponsibleDependency/HomePageSe';
 import { HomePageUs } from '../src/Pages/Usuarios/User/HomePageUs';
 import { HomePageAd } from '../src/Pages/Usuarios/Admin/HomePageAd';
-import { EdicionUsuarios } from '../src/Pages/Usuarios/Admin/edicionUsuarios/edicionUsuarios';
+import TiposCategoria from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposCategoria';
+import TiposDependencia from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposDependencia';
+import TiposIdentificacion from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposIdentificacion';
+import TiposSolicitud from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposSolicitud';
+import { EdicionUsuario } from '../src/Pages/Usuarios/Admin/EdicionUsuario/EdicionUsuario';
+import { VerUsuarios } from '../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios';
 
 export const AppRouter = () => {
   return (
@@ -26,18 +30,22 @@ export const AppRouter = () => {
           <Route path="/Registro" element={<Registro />} />
           <Route path="*" element={<PageNotFound />} />
           <Route element={<Navbar />}>
-            <Route path="/EdicionPersona" element={<EdicionPersona />} />
+            <Route path="/EdicionUsuario" element={<EdicionUsuario />} />
             <Route path="/EditarPerfilAdmin" element={<EditarPerfilAdmin />} />
             <Route path="/EditarPerfilUser" element={<EditarPerfilUser />} />
             <Route path="/EditarPerfilSecre" element={<EditarPerfilSecre />} />
             <Route path="/CrearUsuario" element={<CrearUsuario />} />
-            <Route path="/EdicionUsuarios" element={<EdicionUsuarios />} />
+            <Route path="/VeUsuarios" element={<VerUsuarios />} />
             <Route path="/VerPQRS" element={<VerPQRS />} />
             <Route path="/CrearPQRS" element={<CrearPQRS />} />
             <Route path="/GestionPQRS" element={<GestionPQRS />} />
             <Route path="/HomePagesAdmin" element={<HomePageAd />} />
             <Route path="/HomePagesUser" element={<HomePageUs />} />
             <Route path="/HomePagesSecre" element={<HomePageSe />} />
+            <Route path="/TiposCategoria" element={<TiposCategoria />} />
+            <Route path="/TiposDependencia" element={<TiposDependencia />} />
+            <Route path="/TiposIdentificacion" element={<TiposIdentificacion />} />
+            <Route path="/TiposSolicitud" element={<TiposSolicitud />} />
           </Route>
         </Route>
       </Routes>
