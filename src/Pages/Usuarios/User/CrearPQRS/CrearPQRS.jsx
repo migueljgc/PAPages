@@ -99,12 +99,12 @@ export const CrearPQRS = () => {
 
     const handleReset = () => {
         const fechaActual = new Date();
-        const fechaTexto = fechaActual.toDateString();
+        const fechaFormat = fechaActual.toISOString().slice(0, 10);
         setFormData({
             medioRespuesta: '',
             answer: '',
             category: '',
-            date: fechaTexto,
+            date: fechaFormat,
             description: '',
             idRequest: '',
             mediumAnswer: '',
@@ -116,21 +116,23 @@ export const CrearPQRS = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             console.log('Datos del formulario a enviar:', formData);
-
+    
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
             const StateRequest = { idRequestState: 1 };
             const requestData = {
-                fecha: formData.date,
+                date: formData.date,
                 description: formData.description,
                 mediumAnswer: formData.mediumAnswer,
                 category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
                 requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
                 requestState: StateRequest,
+                dependence: { idDependence: formData.dependencia } // Asegúrate de incluir el ID de la dependencia aquí
             };
+    
             const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData);
             console.log('Respuesta al guardar PQRS:', respuesta.data);
             console.log('PQRS registrada correctamente');
