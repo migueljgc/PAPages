@@ -76,6 +76,7 @@ export const Registro = () => {
             const selectedIdentificationType = identificationTypes.find(type => type.idIdentificationType === parseInt(formData.tipoIdentificacion));
             const selectedPersonType = personTypes.find(type => type.idPersonType === parseInt(formData.tipoPersona));
 
+            if (formData.contraseña === formData.confirmarContraseña) {
             const requestData = {
                 personType: { idPersonType: selectedPersonType.idPersonType },
                 name: formData.nombre,
@@ -101,6 +102,10 @@ export const Registro = () => {
             console.log('Respuesta al guardar usuario:', userResponse.data);
             console.log('Usuario registrado correctamente');
             alert('Usuario Registrado Correctamente');
+        } else {
+            alert('Contraseñas no coinciden')
+        }
+
         } catch (error) {
             console.error('Error al guardar información en la base de datos', error);
         }

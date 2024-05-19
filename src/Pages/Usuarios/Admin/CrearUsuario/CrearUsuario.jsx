@@ -95,33 +95,44 @@ export const CrearUsuario = () => {
             // Obtener el objeto completo de tipo de identificación seleccionado
             const selectedRolesType = rolesTypes.find(type => type.id === parseInt(formData.rol));
 
-            const estadoUsuario = 'Activo';
-            const requestData = {
-                personType: { idPersonType: selectedPersonType.idPersonType },
-                name: formData.nombre,
-                lastName: formData.apellido,
-                email: formData.correo,
-                identificationType: { idIdentificationType: selectedIdentificationType.idIdentificationType }, // Enviar el objeto completo
-                identificationNumber: formData.identificacion,
-                stateUser: estadoUsuario,
-            };
+            
 
-            const personResponse = await axios.post('http://localhost:8080/api/person/save', requestData);
-            console.log('Respuesta al guardar persona:', personResponse.data);
-            const personId = personResponse.data.idPerson;
+            if (formData.contraseña === formData.confirmarContraseña) {
+                
+                const requestData = {
+                    personType: { idPersonType: selectedPersonType.idPersonType },
+                    name: formData.nombre,
+                    lastName: formData.apellido,
+                    email: formData.correo,
+                    identificationType: { idIdentificationType: selectedIdentificationType.idIdentificationType }, // Enviar el objeto completo
+                    identificationNumber: formData.identificacion,
+                    
+                };
 
-            const userResponse = await axios.post('http://localhost:8080/api/user/save', {
-                user: formData.usuario,
-                password: formData.contraseña,
-                person: { idPerson: personId }, // Pasar la persona completa
-                role: { id: selectedRolesType.id }, // Pasar el objeto del rol
-            });
-            console.log('Respuesta al guardar usuario:', userResponse.data);
-            console.log('Usuario registrado correctamente');
+                const personResponse = await axios.post('http://localhost:8080/api/person/save', requestData);
+                console.log('Respuesta al guardar persona:', personResponse.data);
+                const personId = personResponse.data.idPerson;
+
+
+                const userResponse = await axios.post('http://localhost:8080/api/user/save', {
+                    user: formData.usuario,
+                    password: formData.contraseña,
+                    person: { idPerson: personId },
+                    role: { id: selectedRolesType.id },
+                    stateUser: 'Activo',
+                });
+                console.log('Respuesta al guardar usuario:', userResponse.data);
+                console.log('Usuario registrado correctamente');
+                alert('Usuario registrado correctamente')
+                handleReset();
+            } else {
+                alert('Contraseñas no coinciden')
+            }
+
         } catch (error) {
             console.error('Error al guardar información:', error);
         }
-        handleReset();
+       
     };
 
     return (
