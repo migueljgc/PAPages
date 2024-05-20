@@ -3,22 +3,23 @@ import { BackGraund } from '../../../../../componentes/BackGraund';
 import { MenuAdmin } from '../../../../../componentes/Menu';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import './Tipos.css'
 
-const TiposIdentificacion = () => {
+export const TiposIdentificacion = () => {
 
     const [data, setData] = useState([]);
-    
-    const fetchData = async () =>{
-        try{
+
+    const fetchData = async () => {
+        try {
             const response = await axios.get('http://localhost:8080/api/identification_type/get')
             setData(response.data);
             console.log(response.data)
-        } catch (error){
+        } catch (error) {
             console.error('Error en la data: ', error);
         }
 
     };
-    useEffect( () => {
+    useEffect(() => {
         fetchData();
     }, []);
     const columns = [
@@ -38,6 +39,10 @@ const TiposIdentificacion = () => {
         <div>
             <BackGraund />
             <MenuAdmin />
+            <div class="Ap">
+                <div class="tabla"></div>
+                <div class="formulario"></div>
+            </div>
             <h1>Tipo de Identificacion</h1>
             <DataTable
 
@@ -50,4 +55,4 @@ const TiposIdentificacion = () => {
 }
 
 
-export default TiposIdentificacion;
+

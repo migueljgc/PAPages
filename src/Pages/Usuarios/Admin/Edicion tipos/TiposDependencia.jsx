@@ -3,22 +3,23 @@ import { BackGraund } from '../../../../../componentes/BackGraund';
 import { MenuAdmin } from '../../../../../componentes/Menu';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import './Tipos.css'
 
-const TiposDependencia = () => {
+export const TiposDependencia = () => {
 
     const [data, setData] = useState([]);
-    
-    const fetchData = async () =>{
-        try{
+
+    const fetchData = async () => {
+        try {
             const response = await axios.get('http://localhost:8080/api/dependence/get')
             setData(response.data);
             console.log(response.data)
-        } catch (error){
+        } catch (error) {
             console.error('Error en la data: ', error);
         }
 
     };
-    useEffect( () => {
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -38,6 +39,10 @@ const TiposDependencia = () => {
         <div>
             <BackGraund />
             <MenuAdmin />
+            <div class="Ap">
+                <div class="tabla"></div>
+                <div class="formulario"></div>
+            </div>
             <h1>Tipo de Dependencia</h1>
             <DataTable
 
@@ -50,4 +55,3 @@ const TiposDependencia = () => {
 }
 
 
-export default TiposDependencia;

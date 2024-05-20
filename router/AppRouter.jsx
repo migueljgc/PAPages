@@ -12,10 +12,10 @@ import { GestionPQRS } from '../src/Pages/Usuarios/ResponsibleDependency/Gestion
 import { HomePageSe } from '../src/Pages/Usuarios/ResponsibleDependency/HomePageSe';
 import { HomePageUs } from '../src/Pages/Usuarios/User/HomePageUs';
 import { HomePageAd } from '../src/Pages/Usuarios/Admin/HomePageAd';
-import TiposCategoria from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposCategoria';
-import TiposDependencia from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposDependencia';
-import TiposIdentificacion from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposIdentificacion';
-import TiposSolicitud from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposSolicitud';
+import { TiposCategoria } from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposCategoria';
+import { TiposDependencia } from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposDependencia';
+import { TiposIdentificacion } from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposIdentificacion';
+import { TiposSolicitud } from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposSolicitud';
 import { EdicionUsuario } from '../src/Pages/Usuarios/Admin/EdicionUsuario/EdicionUsuario';
 import { VerUsuarios } from '../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios';
 
@@ -35,7 +35,7 @@ export const AppRouter = () => {
             <Route path="/EditarPerfilUser" element={<EditarPerfilUser />} />
             <Route path="/EditarPerfilSecre" element={<EditarPerfilSecre />} />
             <Route path="/CrearUsuario" element={<CrearUsuario />} />
-            <Route path="/VeUsuarios" element={<VerUsuarios />} />
+            <Route path="/VerUsuarios" element={<VerUsuarios />} />
             <Route path="/VerPQRS" element={<VerPQRS />} />
             <Route path="/CrearPQRS" element={<CrearPQRS />} />
             <Route path="/GestionPQRS" element={<GestionPQRS />} />
