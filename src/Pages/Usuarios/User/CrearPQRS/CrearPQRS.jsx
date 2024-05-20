@@ -15,7 +15,7 @@ export const CrearPQRS = () => {
         mediumAnswer: '',
         requestState: '',
         requestType: '',
-        // user: localStorage.getItem('username') || '',
+        user: localStorage.getItem('username') || '',
         dependencia: '',
     });
 
@@ -93,7 +93,7 @@ export const CrearPQRS = () => {
             mediumAnswer: '',
             requestState: '',
             requestType: '',
-            // user: localStorage.getItem('username') || '',
+            user: localStorage.getItem('username') || '',
             dependencia: '',
         });
     };
@@ -112,7 +112,7 @@ export const CrearPQRS = () => {
                 category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
                 requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
                 requestState: StateRequest,
-                // user: { idUser: formData.user },
+                user: { user: formData.user },
                 dependence: { idDependence: formData.dependencia }
             };
 
