@@ -43,6 +43,8 @@ export const Login = () => {
                 }
 
                 if (roleId === 1 && stateUser === "Activo") {
+                    localStorage.setItem('username', user);
+                    localStorage.setItem('password', password);
                     navigate('/HomePagesAdmin', {
                         replace: true,
                         state: {
@@ -51,6 +53,8 @@ export const Login = () => {
                         }
                     });
                 } else if (roleId === 2 && stateUser === "Activo") {
+                    localStorage.setItem('username', user);
+                    localStorage.setItem('password', password);
                     navigate('/HomePagesUser', {
                         replace: true,
                         state: {
@@ -58,7 +62,9 @@ export const Login = () => {
                             user,
                         }
                     });
-                }else if (roleId === 3 && stateUser === "Activo") {
+                } else if (roleId === 3 && stateUser === "Activo") {
+                    localStorage.setItem('username', user);
+                    localStorage.setItem('password', password);
                     navigate('/HomePagesSecre', {
                         replace: true,
                         state: {
@@ -67,6 +73,7 @@ export const Login = () => {
                         }
                     });
                 }
+
             } else {
                 alert('Credenciales incorrectas');
             }

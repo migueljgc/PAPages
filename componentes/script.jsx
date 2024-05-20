@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import './script.css'
 const user=localStorage.getItem('username');
     console.log(user)
+
 export const Script = () => {
   return (
 

@@ -12,8 +12,14 @@ export const VerPQRS = () => {
     const fetchData = async () =>{
         try{
             const response = await axios.get('http://localhost:8080/api/request/get')
-            setData(response.data);
-            console.log(response.data)
+            const usuario=localStorage.getItem('username');
+            if (usuario) {
+                const filteredData = response.data.filter(item => item.user && item.user.user === usuario); // Filtrar los datos por el usuario
+                setData(filteredData);
+            } else {
+                setData([]);
+            }
+            console.log(response.data);
         } catch (error){
             console.error('Error en la data: ', error);
         }
