@@ -107,7 +107,7 @@ export const TiposCategoria = () => {
 
                 </div>
                 <div className="formulario">
-                    <div className="categoryForm">
+                    <div className="Form">
                         <form onSubmit={handleSubmit}>
                             <div className="input-box1">
                                 <label htmlFor="category">Categoria:</label><br />

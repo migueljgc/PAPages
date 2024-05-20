@@ -8,6 +8,9 @@ import './Tipos.css'
 export const TiposIdentificacion = () => {
 
     const [data, setData] = useState([]);
+    const [formData, setFormData] = useState({
+        identificationType: '',
+    });
 
     const fetchData = async () => {
         try {
@@ -22,6 +25,42 @@ export const TiposIdentificacion = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleReset = () => {
+        setFormData({
+            identificationType: '',
+        });
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log('Datos del formulario a enviar:', formData);
+            const identificationTypeResponse = await axios.post('http://localhost:8080/api/identification_type/save', {
+                nameIdentificationType: formData.identificationType
+            });
+            console.log('Respuesta al guardar dependencia:', identificationTypeResponse.data);
+            console.log('dependencia registrada correctamente');
+            alert('dependencia registrada correctamente')
+            handleReset();
+            fetchData();
+
+        }
+        catch (error) {
+            console.error('Error al guardar información:', error);
+        }
+
+    }
+
+
+
     const columns = [
         {
             name: 'Id',
@@ -39,17 +78,39 @@ export const TiposIdentificacion = () => {
         <div>
             <BackGraund />
             <MenuAdmin />
-            <div class="Ap">
-                <div class="tabla"></div>
-                <div class="formulario"></div>
-            </div>
             <h1>Tipo de Identificacion</h1>
-            <DataTable
+            <div className="Ap">
+                <div className="tabla">
+                    <DataTable
 
                 columns={columns}
                 data={data}
 
             />
+                </div>
+                <div className="formulario">
+                <div className="Form">
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-box1">
+                                <label htmlFor="identificationType">Tipos de Identificacion: :</label><br />
+                                <input
+                                    type="text"
+                                    id="identificationType"
+                                    name="identificationType"
+                                    value={formData.identificationType}
+                                    onChange={handleChange} required
+                                />
+                            </div> <br />
+                            <div className="btnRegistrar">
+                                <button type="submit">Registrar</button>
+                            </div><br />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            
+            
         </div>
     );
 }

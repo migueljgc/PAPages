@@ -7,6 +7,9 @@ import './Tipos.css'
 
 export const TiposSolicitud = () => {
     const [data, setData] = useState([]);
+    const [formData, setFormData] = useState({
+        requestType: '',
+    });
 
     const fetchData = async () => {
         try {
@@ -21,6 +24,39 @@ export const TiposSolicitud = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleReset = () => {
+        setFormData({
+            requestType: '',
+        });
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log('Datos del formulario a enviar:', formData);
+            const requestTypeResponse = await axios.post('http://localhost:8080/api/request_type/save', {
+                nameRequestType: formData.requestType
+            });
+            console.log('Respuesta al guardar dependencia:', requestTypeResponse.data);
+            console.log('dependencia registrada correctamente');
+            alert('dependencia registrada correctamente')
+            handleReset();
+            fetchData();
+
+        }
+        catch (error) {
+            console.error('Error al guardar información:', error);
+        }
+
+    }
+
 
     const columns = [
         {
@@ -38,17 +74,37 @@ export const TiposSolicitud = () => {
         <div>
             <BackGraund />
             <MenuAdmin />
-            <div class="Ap">
-                <div class="tabla"></div>
-                <div class="formulario"></div>
-            </div>
             <h1>Tipo de Solicitud</h1>
-            <DataTable
+            <div className="Ap">
+                <div className="tabla">
+                    <DataTable
+                        columns={columns}
+                        data={data}
 
-                columns={columns}
-                data={data}
+                    />
+                </div>
+                <div className="formulario">
+                <div className="Form">
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-box1">
+                                <label htmlFor="requestType">Tipos de Solicitudes: :</label><br />
+                                <input
+                                    type="text"
+                                    id="requestType"
+                                    name="requestType"
+                                    value={formData.requestType}
+                                    onChange={handleChange} required
+                                />
+                            </div> <br />
+                            <div className="btnRegistrar">
+                                <button type="submit">Registrar</button>
+                            </div><br />
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-            />
+
         </div>
     );
 }

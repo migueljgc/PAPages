@@ -13,7 +13,7 @@
   
   .formulario { grid-area: formulario; }
 
-.categoryForm{
+.Form{
   border: 2px solid rgb(0, 0, 0);
   text-align: center;
 

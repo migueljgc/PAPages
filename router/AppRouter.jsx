@@ -18,6 +18,7 @@ import { TiposIdentificacion } from '../src/Pages/Usuarios/Admin/Edicion tipos/T
 import { TiposSolicitud } from '../src/Pages/Usuarios/Admin/Edicion tipos/TiposSolicitud';
 import { EdicionUsuario } from '../src/Pages/Usuarios/Admin/EdicionUsuario/EdicionUsuario';
 import { VerUsuarios } from '../src/Pages/Usuarios/Admin/VerUsuarios/VerUsuarios';
+import { ReplyPQRS } from '../src/Pages/Usuarios/ResponsibleDependency/ReplyPQRS/ReplyPQRS';
 
 export const AppRouter = () => {
   return (
@@ -39,6 +40,7 @@ export const AppRouter = () => {
             <Route path="/VerPQRS" element={<VerPQRS />} />
             <Route path="/CrearPQRS" element={<CrearPQRS />} />
             <Route path="/GestionPQRS" element={<GestionPQRS />} />
+            <Route path="/ReplyPQRS" element={<ReplyPQRS />} />
             <Route path="/HomePagesAdmin" element={<HomePageAd />} />
             <Route path="/HomePagesUser" element={<HomePageUs />} />
             <Route path="/HomePagesSecre" element={<HomePageSe />} />

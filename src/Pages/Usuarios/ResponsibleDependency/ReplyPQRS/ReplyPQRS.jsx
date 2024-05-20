@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-import './VerPQRS.css';
-import { MenuSecre } from '../../../../../componentes/Menu';
+import React from 'react';
 import { BackGraund } from '../../../../../componentes/BackGraund';
+import { MenuSecre } from '../../../../../componentes/Menu';
 
-export const GestionPQRS = () => {
+export const ReplyPQRS = () => {
     return (
-        <div className='VerPQRS'>
+        <div>
             <BackGraund/>
             <MenuSecre/>
                 <div className="gestion">
@@ -14,10 +13,7 @@ export const GestionPQRS = () => {
                     </p>
 
                 </div>
-            </div>
-
+        </div>
     );
-};
-
-
+}
 

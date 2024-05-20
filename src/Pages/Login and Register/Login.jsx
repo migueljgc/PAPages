@@ -58,6 +58,14 @@ export const Login = () => {
                             user,
                         }
                     });
+                }else if (roleId === 3 && stateUser === "Activo") {
+                    navigate('/HomePagesSecre', {
+                        replace: true,
+                        state: {
+                            logged: true,
+                            user,
+                        }
+                    });
                 }
             } else {
                 alert('Credenciales incorrectas');

@@ -8,6 +8,7 @@ export const EditarPerfilAdmin = () => {
             <BackGraund />
             <MenuAdmin />
             <h1>Editar Perfil-</h1>
+            <p>PROXIMAMENTE</p>
         </div>)
 }
 export const EditarPerfilUser = () => {
@@ -16,6 +17,7 @@ export const EditarPerfilUser = () => {
             <BackGraund />
             <MenuUser />
             <h1>Editar Perfil-</h1>
+            <p>PROXIMAMENTE</p>
         </div>)
 }
 export const EditarPerfilSecre = () => {
@@ -24,5 +26,6 @@ export const EditarPerfilSecre = () => {
             <BackGraund />
             <MenuSecre />
             <h1>Editar Perfil-</h1>
+            <p>PROXIMAMENTE</p>
         </div>)
 }

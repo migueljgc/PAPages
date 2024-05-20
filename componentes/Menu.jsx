@@ -60,8 +60,8 @@ export const MenuSecre = () => {
                         <input type="checkbox" id="btn-nav" />
                         <nav>
                             <ul className="men">
-                                <li><a href="/CrearPQRS"> Crear PQRS </a></li>
-                                <li><a href="/VerPQRS"> Ver PQRS </a></li>
+                                <li><a href="/GestionPQRS"> Gestion PQRS </a></li>
+                                <li><a href="/ReplyPQRS"> Responder PQRS </a></li>
 
                             </ul>
                         </nav>

@@ -3,11 +3,16 @@ import React from "react";
 import './Recovery.css';
 
 export const Recovery = () => {
+    const proxi ='PROXIMAMNETE';
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        alert(proxi)
+    }
     return (
         <div className="recovery">
             <BackGraund />
             <div className="reco">
-                <form className="rec">
+                <form className="rec" onSubmit={handleSubmit}>
 
                     <h2>¿Olvidate tu contraseña?</h2>
                     <label>Para recuperar tu contraseña ingrese su Email o Numero</label><br /><br />
@@ -17,6 +22,7 @@ export const Recovery = () => {
                             type="text"
                             id="email"
                             name="email"
+                            required
                         />
                     </div > <br />
                     <button> Solicitar</button>

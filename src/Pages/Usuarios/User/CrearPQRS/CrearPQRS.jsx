@@ -15,21 +15,20 @@ export const CrearPQRS = () => {
         mediumAnswer: '',
         requestState: '',
         requestType: '',
-        user: '',
-        dependencia: '', // Nuevo estado para almacenar la dependencia seleccionada
+        // user: localStorage.getItem('username') || '',
+        dependencia: '',
     });
 
     const [categoriasTypes, setCategorias] = useState([]);
     const [date, setFecha] = useState('');
     const [requestType, setRequest] = useState([]);
-    const [dependencias, setDependencias] = useState([]); // Nuevo estado para almacenar las dependencias
+    const [dependencias, setDependencias] = useState([]);
     const [filteredCategorias, setFilteredCategorias] = useState([]);
 
     useEffect(() => {
         const fetchCategorias = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/category/get');
-                console.log('Categorias obtenidas:', response.data);
                 setCategorias(response.data);
             } catch (error) {
                 console.error('Error al obtener categorias:', error);
@@ -39,7 +38,6 @@ export const CrearPQRS = () => {
         const fetchRequest = async () => {
             try {
                 const response1 = await axios.get('http://localhost:8080/api/request_type/get');
-                console.log('Tipos de solicitudes obtenidas:', response1.data);
                 setRequest(response1.data);
             } catch (error) {
                 console.error('Error al obtener Tipos de solicitudes', error);
@@ -49,7 +47,6 @@ export const CrearPQRS = () => {
         const fetchDependencias = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/dependence/get');
-                console.log('Dependencias obtenidas:', response.data);
                 setDependencias(response.data);
             } catch (error) {
                 console.error('Error al obtener dependencias:', error);
@@ -60,7 +57,7 @@ export const CrearPQRS = () => {
             const fechaActual = new Date();
             const fechaFormat = fechaActual.toISOString().slice(0, 10);
             setFecha(fechaFormat);
-            setFormData(prevFormData => ({ ...prevFormData, date: fechaFormat })); // Actualizar formData con la fecha
+            setFormData(prevFormData => ({ ...prevFormData, date: fechaFormat }));
         };
 
         fetchRequest();
@@ -73,27 +70,13 @@ export const CrearPQRS = () => {
         const { name, value } = e.target;
 
         if (name === 'dependencia') {
-            const dependenciaId = Number(value); // Asegurar que dependenciaId sea un número
-            console.log('ID de la dependencia seleccionada:', dependenciaId);
+            const dependenciaId = Number(value);
+            setFormData(prevState => ({ ...prevState, dependencia: value }));
 
-            setFormData(prevState => ({
-                ...prevState,
-                dependencia: value,
-            }));
-
-            // Filtrar las categorías basadas en la dependencia seleccionada
-            const filtered = categoriasTypes.filter(cat => {
-                console.log('Categoria actual:', cat); // Log de cada categoría
-                return cat.dependence.idDependence === dependenciaId;
-            });
-
-            console.log('Categorías filtradas:', filtered);
+            const filtered = categoriasTypes.filter(cat => cat.dependence.idDependence === dependenciaId);
             setFilteredCategorias(filtered);
         } else {
-            setFormData({
-                ...formData,
-                [name]: value,
-            });
+            setFormData(prevState => ({ ...prevState, [name]: value }));
         }
     };
 
@@ -110,16 +93,15 @@ export const CrearPQRS = () => {
             mediumAnswer: '',
             requestState: '',
             requestType: '',
-            dependencia: '', 
+            // user: localStorage.getItem('username') || '',
+            dependencia: '',
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
-            console.log('Datos del formulario a enviar:', formData);
-    
             const selectedCategoria = categoriasTypes.find(type => type.idCategory === parseInt(formData.category));
             const selectedRequestType = requestType.find(type => type.idRequestType === parseInt(formData.requestType));
             const StateRequest = { idRequestState: 1 };
@@ -130,19 +112,20 @@ export const CrearPQRS = () => {
                 category: { idCategory: selectedCategoria ? selectedCategoria.idCategory : null },
                 requestType: { idRequestType: selectedRequestType ? selectedRequestType.idRequestType : null },
                 requestState: StateRequest,
-                dependence: { idDependence: formData.dependencia } // Asegúrate de incluir el ID de la dependencia aquí
+                // user: { idUser: formData.user },
+                dependence: { idDependence: formData.dependencia }
             };
-    
+
+            console.log('Datos del formulario a enviar:', requestData);
+
             const respuesta = await axios.post('http://localhost:8080/api/request/save', requestData);
-            console.log('Respuesta al guardar PQRS:', respuesta.data);
-            console.log('PQRS registrada correctamente');
             const responseData = respuesta.data;
             const numRadicado = responseData.idRequest;
             alert('Solicitud Radicada Con Exito Su Numero De Radicado es: ' + numRadicado);
+            handleReset();
         } catch (error) {
-            console.error('Error al guardar información:', error);
+            console.error('Error al guardar información:', error.response ? error.response.data : error.message);
         }
-        handleReset();
     };
 
     return (
@@ -153,10 +136,8 @@ export const CrearPQRS = () => {
                 <div className=""></div>
                 <div className="formu">
                     <form className='formPQRS' onSubmit={handleSubmit}>
-                        <p></p>
                         <h1>Registro de PQRS</h1>
 
-                        {/* Campo oculto para la fecha */}
                         <input type='hidden' name="date" value={date} />
 
                         <div className="select-box1">
@@ -183,7 +164,8 @@ export const CrearPQRS = () => {
                                 id="dependencia"
                                 name="dependencia"
                                 value={formData.dependencia}
-                                onChange={handleChange} required>
+                                onChange={handleChange}
+                                required>
                                 <option key="" value="">Seleccione la dependencia</option>
                                 {dependencias.map((dep) => (
                                     <option key={dep.idDependence} value={dep.idDependence}>
@@ -218,7 +200,8 @@ export const CrearPQRS = () => {
                                 id="mediumAnswer"
                                 name="mediumAnswer"
                                 value={formData.mediumAnswer}
-                                onChange={handleChange} required>
+                                onChange={handleChange}
+                                required>
                                 <option value="">Seleccione el tipo</option>
                                 <option value="Correo">Correo</option>
                                 <option value="Numero">Numero</option>
